@@ -1,26 +1,21 @@
 package ClassOrganisation;
 
-import java.text.DecimalFormat;
-
 public class ZipCode {
 
-	private String zipCode;
+	private int zipCode;
 
-	public ZipCode(int code) {
-		Integer Code = new Integer(code);
-		String s = Code.toString();
+	public ZipCode(int value) {
 
-		if (s.length() != 5 && s.length() != 9) {
-			DecimalFormat format = s.length() < 5 ? new DecimalFormat("00000")
-					: new DecimalFormat("000000000");
-			this.zipCode = format.format(code);
+		Integer number = new Integer(value);
 
-		} else {
-			this.zipCode = s;
-		}
+		String s = number.toString();
+
+		if (s.length() == 9 || s.length() == 5) {
+			this.zipCode = value;
+		} 
 	}
 
-	public String getZipCode() {
+	public int getZipCode() {
 		return zipCode;
 	}
 
