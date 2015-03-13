@@ -17,7 +17,7 @@ public class WordCounter {
 
 		try {
 			FileReader file = new FileReader(
-					"E:/PG/git/SVS-HOMEWORK/src/InputOutput/file.txt");
+					"E:/PG/git/SVS-HOMEWORK/src/InputOutput/file.txt"); // Absolute path
 			br = new BufferedReader(file);
 
 			String line = null;
@@ -41,7 +41,6 @@ public class WordCounter {
 			StringBuilder sb = new StringBuilder();
 			while (iter.hasNext()) {
 				String key = iter.next();
-
 				sb.append(key + " : " + map.get(key).intValue() + "\n");
 			}
 			System.out.println(sb.toString());
