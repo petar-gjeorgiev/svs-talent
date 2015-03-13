@@ -35,7 +35,6 @@ public class WordCounter {
 					}
 				}
 			}
-
 			Set<String> keys = map.keySet();
 			Iterator<String> iter = keys.iterator();
 			StringBuilder sb = new StringBuilder();
@@ -44,7 +43,6 @@ public class WordCounter {
 				sb.append(key + " : " + map.get(key).intValue() + "\n");
 			}
 			System.out.println(sb.toString());
-
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		} catch (IOException e) {
