@@ -15,7 +15,7 @@ public class AliExpress {
 		System.out
 				.println("Welcome to the AliExpress e-commerce application\n");
 		System.out.println("Application guide:\n");
-		System.out.println("1 - List all products in the warehouse\n");
+		System.out.println("Type \"1\" to list all products in the warehouse\n");
 
 		scanner = new Scanner(System.in);
 

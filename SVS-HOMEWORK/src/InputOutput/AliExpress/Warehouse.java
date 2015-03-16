@@ -51,7 +51,11 @@ public class Warehouse implements ProductInterface {
 		try {
 			scanner = new Scanner(
 					new File(
-							"C:/Users/user/git/svs-homework/SVS-HOMEWORK/src/InputOutput/AliExpress/Products.txt"));
+							"E:/Petar Gjeorgiev/git/svs-talent/SVS-HOMEWORK/src/InputOutput/AliExpress/Products.txt")); // Absolute
+																														// path
+																														// to
+																														// Products.txt
+																														// file
 
 			String line = "";
 
