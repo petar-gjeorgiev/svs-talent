@@ -25,7 +25,6 @@ public class Stopwatch implements Runnable {
 			} catch (InterruptedException e) {
 			}
 			System.out.println(startValue);
-
 		}
 	}
 
