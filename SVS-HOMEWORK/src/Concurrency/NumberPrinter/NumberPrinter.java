@@ -1,4 +1,4 @@
-package Concurrency;
+package Concurrency.NumberPrinter;
 
 
 public class NumberPrinter {
