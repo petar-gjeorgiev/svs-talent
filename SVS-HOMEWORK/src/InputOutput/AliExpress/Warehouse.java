@@ -45,7 +45,7 @@ public class Warehouse implements ProductInterface {
 		System.out.println(sb.toString());
 	}
 
-	public static void fillWarehouse(Warehouse warehouse) {
+	public static void fillWarehouse(Warehouse warehouse) { // In other class
 
 		Scanner scanner;
 		try {
