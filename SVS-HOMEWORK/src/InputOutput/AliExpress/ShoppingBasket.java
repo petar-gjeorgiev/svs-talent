@@ -14,7 +14,7 @@ public class ShoppingBasket {
 		basket.put(p, new Integer(quantity));
 	}
 
-	public void listAllProducts() throws EmptyShoppingBasketException {
+	public void listAllProducts() throws EmptyShoppingBasketException { // Not here in the controller
 		StringBuilder sb = new StringBuilder();
 		int sum = 0;
 		String id = "ID";
