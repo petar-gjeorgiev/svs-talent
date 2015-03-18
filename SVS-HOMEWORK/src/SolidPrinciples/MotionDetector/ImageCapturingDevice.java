@@ -1,4 +1,4 @@
-package MotionDetector;
+package SolidPrinciples.MotionDetector;
 
 import java.util.List;
 import java.util.Scanner;

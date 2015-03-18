@@ -1,4 +1,4 @@
-package MotionDetector;
+package SolidPrinciples.MotionDetector;
 
 public interface AlarmChannel {
 
