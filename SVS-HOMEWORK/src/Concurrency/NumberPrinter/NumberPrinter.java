@@ -1,42 +1,23 @@
 package Concurrency.NumberPrinter;
 
+public class NumberPrinter implements Runnable {
 
-public class NumberPrinter {
+	private int numberTo;
 
-	public static void main(String[] args) throws InterruptedException {
-
-		int to = Integer.parseInt(args[0]);
-		float timeInterval = Float.parseFloat(args[1]);
-		long time =  (long) (timeInterval*1000);
-		
-		final Numbers numbers = new Numbers(to);
-		Thread t = new Thread(numbers);
-		
-		
-		t.start();
-		Thread.sleep(time);
-		t.interrupt();
+	public NumberPrinter(int numberTo) {
+		this.numberTo = numberTo;
 	}
 
-	
-	public static class Numbers implements Runnable {
-
-		public int to;
-		
-		public Numbers(int to) {
-			this.to = to;
-		}
-
-		@Override
-		public void run() {
-			for(int i=1;i<=to;i++) {
-				if(Thread.interrupted()) {
-					System.out.println("Interrupted\n");
-					return;
-				}
-				System.out.println(i);
+	@Override
+	public void run() {
+		for (int i = 1; i <= numberTo; i++) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				return;
 			}
+			System.out.println(String.valueOf(i));
 		}
-		
 	}
+
 }
