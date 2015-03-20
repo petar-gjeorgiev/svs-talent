@@ -1,4 +1,4 @@
-package InputOutput;
+package wordCounter;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class WordCounter {
 
 	private static BufferedReader br;
@@ -17,7 +19,7 @@ public class WordCounter {
 
 		try {
 			FileReader file = new FileReader(
-					"E:/PG/git/SVS-HOMEWORK/src/InputOutput/file.txt"); // Absolute path
+					"E:/Petar Gjeorgiev/git/svs-talent/SVS-HOMEWORK/src/InputOutput/WordCounter/file.txt"); // Absolute path
 			br = new BufferedReader(file);
 
 			String line = null;
@@ -26,7 +28,7 @@ public class WordCounter {
 			while ((line = br.readLine()) != null) {
 				StringTokenizer st = new StringTokenizer(line);
 				while (st.hasMoreTokens()) {
-					String word = st.nextToken();
+					String word = StringUtils.upperCase(st.nextToken());
 					if (map.containsKey(word)) {
 						int numTimes = map.get(word).intValue() + 1;
 						map.put(word, new Integer(numTimes));
