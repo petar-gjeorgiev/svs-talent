@@ -8,25 +8,22 @@ import SolidPrinciples.MotionDetector.Abstractions.ImageCapturingDevice;
 
 public class MotionDetector {
 
-	private boolean enable;
-
 	private List<AlarmChannel> alarms;
 
 	private List<ImageCapturingDevice> images;
 
 	public MotionDetector() {
-		this.enable = false;
 		this.alarms = new ArrayList<AlarmChannel>();
 		this.images = new ArrayList<ImageCapturingDevice>();
 	}
 
-	public void sendAlarm() {
+	public void sendAlarm(Alarm a) {
 		if(images.size()>1) {
 			for(int i=0;i<images.size()-1;i++) {
 				byte [] predecessor = images.get(i).getImage();
 				byte [] follower = images.get(++i).getImage();
 				if(!predecessor.toString().equals(follower.toString())) {
-					
+					alarms.add(new AlarmAdapter(a));
 				}
 			}
 		}
