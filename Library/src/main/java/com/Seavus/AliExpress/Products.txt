@@ -1,0 +1,5 @@
+1|Laptop|300|4
+2|PC|500|3
+3|Monitor|200|1
+4|Tablet|150|42
+5|Notepad|100|12
