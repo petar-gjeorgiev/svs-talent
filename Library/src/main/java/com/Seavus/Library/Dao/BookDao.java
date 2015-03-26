@@ -9,6 +9,7 @@ public interface BookDao {
 	public void listAllBooks();
 
 	public void updateBook(Book book);
-	
+
 	public void unregisterBook(Book book);
+
 }

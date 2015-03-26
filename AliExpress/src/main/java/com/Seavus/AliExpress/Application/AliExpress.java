@@ -1,6 +1,14 @@
-package com.Seavus.AliExpress;
+package com.Seavus.AliExpress.Application;
 
 import java.util.Scanner;
+
+import com.Seavus.AliExpress.Product;
+import com.Seavus.AliExpress.ShoppingBasket;
+import com.Seavus.AliExpress.Warehouse;
+import com.Seavus.AliExpress.Exceptions.EmptyShoppingBasketException;
+import com.Seavus.AliExpress.Exceptions.InvalidInputException;
+import com.Seavus.AliExpress.Exceptions.InvalidProductException;
+import com.Seavus.AliExpress.Exceptions.QuantityException;
 
 public class AliExpress {
 
@@ -15,7 +23,8 @@ public class AliExpress {
 		System.out
 				.println("Welcome to the AliExpress e-commerce application\n");
 		System.out.println("Application guide:\n");
-		System.out.println("Type \"1\" to list all products in the warehouse\n");
+		System.out
+				.println("Type \"1\" to list all products in the warehouse\n");
 
 		scanner = new Scanner(System.in);
 

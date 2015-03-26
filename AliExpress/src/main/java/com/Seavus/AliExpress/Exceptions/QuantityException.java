@@ -1,4 +1,4 @@
-package com.Seavus.AliExpress;
+package com.Seavus.AliExpress.Exceptions;
 
 public class QuantityException extends Exception {
 

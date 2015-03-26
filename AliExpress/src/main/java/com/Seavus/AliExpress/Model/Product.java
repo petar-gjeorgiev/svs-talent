@@ -1,4 +1,4 @@
-package com.Seavus.AliExpress;
+package com.Seavus.AliExpress.Model;
 
 public class Product implements Comparable<Product> {
 
@@ -10,6 +10,10 @@ public class Product implements Comparable<Product> {
 
 	private int quantity;
 
+	public Product () {
+		
+	}
+	
 	public Product(String id, String name, int price, int quantity) {
 		this.id = id;
 		this.name = name;
