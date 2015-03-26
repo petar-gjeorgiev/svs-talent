@@ -11,7 +11,7 @@ public class ImageAdapter implements ImageCapturingDevice {
 	}
 
 	@Override
-	public void captureImage(byte[] image) {
+	public void captureImage(byte [] image) {
 		this.image.captureImage(image);
 	}
 

@@ -1,15 +1,15 @@
 package SolidPrinciples.MotionDetector.Implementations;
 
 public class Image {
-	
-	private byte [] image;
+
+	private byte[] image;
 
 	public byte[] getImage() {
 		return image;
 	}
-	
-	public void captureImage(byte [] image) {
+
+	public void captureImage(byte[] image) {
 		this.image = image;
 	}
-	
+
 }
