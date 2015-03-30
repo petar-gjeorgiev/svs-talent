@@ -7,22 +7,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.Seavus.Library.Dao.BookDao;
+import com.Seavus.Library.Dao.JDBCBookDao;
 import com.Seavus.Library.Model.Book;
 
-public class JDBCBookDaoImpl implements BookDao {
+public class JDBCBookDaoImpl implements JDBCBookDao {
 
-	/**
-	 * 
-	 * 
-	 */
 	public static Connection connection;
+
+	public static final String DB = "jdbc:postgresql://localhost:5432/Library";
+
+	public static final String USERNAME = "postgres";
+
+	public static final String PASSWORD = "postgres";
 
 	public void registerBook(Book book) {
 		try {
-			connection = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/Library", "postgres",
-					"library1!");
+			connection = DriverManager.getConnection(DB, USERNAME, PASSWORD);
 			String sql = "insert into book(isbn,title) values(?,?)";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(sql);
@@ -36,32 +36,35 @@ public class JDBCBookDaoImpl implements BookDao {
 
 	}
 
-	public void listAllBooks() {
+	public String listAllBooks() {
+		StringBuilder sb = new StringBuilder();
 		try {
-			connection = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/Library", "postgres",
-					"library1!");
+			connection = DriverManager.getConnection(DB, USERNAME, PASSWORD);
 			Statement statement = connection.createStatement();
 			String sql = "select * from book";
 			ResultSet resultSet = statement.executeQuery(sql);
+			String id1 = "ID";
+			String isbn1 = "ISBN";
+			String title1 = "TITLE";
+			sb.append(String.format("%-4s %-8s %-15s", id1, isbn1, title1)
+					+ "\n");
 			while (resultSet.next()) {
 				Long id = resultSet.getLong("id");
 				String isbn = resultSet.getString("isbn");
 				String title = resultSet.getString("title");
-				System.out.println(id + " | " + isbn + " | " + title);
+				sb.append(String.format("%-4d %-8s %-15s", id, isbn, title)
+						+ "\n");
 			}
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		return sb.toString();
 	}
 
 	public void updateBook(Book book) {
 		try {
-			connection = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/Library", "postgres",
-					"library1!");
+			connection = DriverManager.getConnection(DB, USERNAME, PASSWORD);
 			Long id = book.getId();
 			String isbn = book.getIsbn();
 			String title = book.getTitle();
@@ -78,12 +81,10 @@ public class JDBCBookDaoImpl implements BookDao {
 		}
 	}
 
-	public void unregisterBook(Book book) {
+	public void unregisterBook(long id1) {
 		try {
-			connection = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/Library", "postgres",
-					"library1!");
-			Long id = book.getId();
+			connection = DriverManager.getConnection(DB, USERNAME, PASSWORD);
+			Long id = new Long(id1);
 			String sql = "delete from book where id = " + id;
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(sql);

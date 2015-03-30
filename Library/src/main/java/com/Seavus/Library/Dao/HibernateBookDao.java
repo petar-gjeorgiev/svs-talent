@@ -1,10 +1,9 @@
 package com.Seavus.Library.Dao;
 
-
-public interface FactoryDao extends BookDao {
+public interface HibernateBookDao extends JDBCBookDao {
 
 	public void createSessionFactory();
-	
+
 	public void closeFactory();
-	
+
 }
