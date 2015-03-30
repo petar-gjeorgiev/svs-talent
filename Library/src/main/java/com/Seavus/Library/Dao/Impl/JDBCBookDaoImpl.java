@@ -10,8 +10,12 @@ import java.sql.Statement;
 import com.Seavus.Library.Dao.BookDao;
 import com.Seavus.Library.Model.Book;
 
-public class BookDaoImpl implements BookDao {
+public class JDBCBookDaoImpl implements BookDao {
 
+	/**
+	 * 
+	 * 
+	 */
 	public static Connection connection;
 
 	public void registerBook(Book book) {
