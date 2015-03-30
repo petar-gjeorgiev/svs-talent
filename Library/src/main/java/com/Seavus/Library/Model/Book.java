@@ -49,11 +49,6 @@ public class Book {
 		return title;
 	}
 
-	@Override
-	public String toString() {
-		return String.format("Title: %s ISBN: %s", title,isbn);
-	}
-
 	public void setId(long id) {
 		this.id = id;
 	}
