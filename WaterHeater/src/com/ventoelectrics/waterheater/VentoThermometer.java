@@ -2,7 +2,9 @@ package com.ventoelectrics.waterheater;
 
 import java.util.Random;
 
-public class VentoThermometer implements VentoPoweredDevice {
+import com.ACME.interfaces.ACMEThermometer;
+
+public class VentoThermometer implements VentoPoweredDevice,ACMEThermometer {
 	
 	private boolean powerEnabled = false;
 	private Random random = new Random(System.currentTimeMillis());

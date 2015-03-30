@@ -1,7 +1,7 @@
 package com.ACME.classes;
 
 import com.ACME.interfaces.ACMEThermoregulator;
-import com.ACME.interfaces.HeaterInterface;
+import com.ACME.interfaces.ACMEHeater;
 import com.ventoelectrics.waterheater.VentoHeater;
 import com.ventoelectrics.waterheater.VentoThermometer;
 import com.ventoelectrics.waterheater.VentoThermoregulator;
@@ -10,7 +10,7 @@ public class StandardThermoregulatorAdapter implements ACMEThermoregulator,Vento
 
 	private StandardThermoregulator t;
 	
-	private HeaterInterface vh;
+	private ACMEHeater vh;
 	
 	public StandardThermoregulatorAdapter(VentoHeater vh,VentoThermometer vt) {
 		t = new StandardThermoregulator();
@@ -33,7 +33,7 @@ public class StandardThermoregulatorAdapter implements ACMEThermoregulator,Vento
 		t.setTemperature(temp);
 	}
 
-	public HeaterInterface getVh() {
+	public ACMEHeater getVh() {
 		return vh;
 	}
 

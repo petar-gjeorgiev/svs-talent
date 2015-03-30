@@ -1,5 +1,8 @@
 package com.ventoelectrics.waterheater;
 
+import com.ACME.classes.EfficientThermoregulator;
+import com.ACME.classes.EfficientThermoregulatorAdapter;
+
 public class EfficientVentoWaterHeaterApp {
 
 	public static void main(String[] args) throws Exception {
@@ -8,7 +11,7 @@ public class EfficientVentoWaterHeaterApp {
 		final VentoHeater ventoHeater = new VentoHeater();
 		final VentoPowerSwitch ventoPowerSwitch = new VentoPowerSwitch();
 
-		final VentoThermoregulator ventoThermoregulator = null; // ACME efficient thermoregulator instance. 
+		final VentoThermoregulator ventoThermoregulator = new EfficientThermoregulatorAdapter(new EfficientThermoregulator(),ventoThermometer,ventoHeater); // ACME efficient thermoregulator instance. 
 
 		ventoPowerSwitch.controlPowerFor(ventoThermoregulator);
 		ventoPowerSwitch.controlPowerFor(ventoHeater);

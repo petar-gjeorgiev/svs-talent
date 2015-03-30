@@ -1,9 +1,9 @@
 package com.ACME.interfaces;
 
-public interface HeaterInterface {
+public interface ACMEHeater {
 
 	public void enablePower();
-	
+
 	public void disablePower();
-	
+
 }

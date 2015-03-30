@@ -1,8 +1,8 @@
 package com.ventoelectrics.waterheater;
 
-import com.ACME.interfaces.HeaterInterface;
+import com.ACME.interfaces.ACMEHeater;
 
-public class VentoHeater implements VentoPoweredDevice,HeaterInterface {
+public class VentoHeater implements VentoPoweredDevice,ACMEHeater {
 	
 	private boolean powerEnabled = false;
 	
