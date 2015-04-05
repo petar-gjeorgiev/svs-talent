@@ -1,15 +1,17 @@
 package com.Seavus.Library.Service;
 
+import java.util.List;
+
+import com.Seavus.Library.Model.Book;
+
 public interface JDBCBookService {
 
-	public void updateBook();
+	public void updateBook(Book b);
 	
-	public void registerBook();
+	public void registerBook(Book b);
 	
-	public void listAllBooks();
+	public List<Book> list();
 
-	public void unregisterBook();
-	
-	public void appInfo();
-	
+	public void unregisterBook(long id);
+
 }

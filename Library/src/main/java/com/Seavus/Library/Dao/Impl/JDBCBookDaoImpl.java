@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.Seavus.Library.Dao.JDBCBookDao;
 import com.Seavus.Library.Model.Book;
@@ -20,7 +22,7 @@ public class JDBCBookDaoImpl implements JDBCBookDao {
 
 	public static final String PASSWORD = "postgres";
 
-	public void registerBook(Book book) {
+	public void register(Book book) {
 		try {
 			connection = DriverManager.getConnection(DB, USERNAME, PASSWORD);
 			String sql = "insert into book(isbn,title) values(?,?)";
@@ -36,33 +38,27 @@ public class JDBCBookDaoImpl implements JDBCBookDao {
 
 	}
 
-	public String listAllBooks() {
-		StringBuilder sb = new StringBuilder();
+	public List<Book> list() {
+		List<Book> books = new ArrayList<Book>();
 		try {
 			connection = DriverManager.getConnection(DB, USERNAME, PASSWORD);
 			Statement statement = connection.createStatement();
 			String sql = "select * from book";
 			ResultSet resultSet = statement.executeQuery(sql);
-			String id1 = "ID";
-			String isbn1 = "ISBN";
-			String title1 = "TITLE";
-			sb.append(String.format("%-4s %-8s %-15s", id1, isbn1, title1)
-					+ "\n");
 			while (resultSet.next()) {
 				Long id = resultSet.getLong("id");
 				String isbn = resultSet.getString("isbn");
 				String title = resultSet.getString("title");
-				sb.append(String.format("%-4d %-8s %-15s", id, isbn, title)
-						+ "\n");
+				books.add(new Book(id, isbn, title));
 			}
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return sb.toString();
+		return books;
 	}
 
-	public void updateBook(Book book) {
+	public void update(Book book) {
 		try {
 			connection = DriverManager.getConnection(DB, USERNAME, PASSWORD);
 			Long id = book.getId();
@@ -81,7 +77,7 @@ public class JDBCBookDaoImpl implements JDBCBookDao {
 		}
 	}
 
-	public void unregisterBook(long id1) {
+	public void unregister(long id1) {
 		try {
 			connection = DriverManager.getConnection(DB, USERNAME, PASSWORD);
 			Long id = new Long(id1);
