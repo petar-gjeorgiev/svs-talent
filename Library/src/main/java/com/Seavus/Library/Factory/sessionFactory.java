@@ -11,7 +11,7 @@ import com.Seavus.Library.Model.Magazine;
 import com.Seavus.Library.Model.Member;
 import com.Seavus.Library.Model.Membership;
 
-public class Factory {
+public class sessionFactory {
 
 	private static SessionFactory sessionFactory;
 		

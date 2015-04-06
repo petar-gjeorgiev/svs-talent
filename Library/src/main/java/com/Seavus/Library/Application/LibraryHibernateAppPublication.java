@@ -5,7 +5,7 @@ import java.util.Scanner;
 import com.Seavus.Library.Controller.HibernateLoanController;
 import com.Seavus.Library.Controller.HibernateMemberController;
 import com.Seavus.Library.Controller.HibernatePublicationController;
-import com.Seavus.Library.Factory.Factory;
+import com.Seavus.Library.Factory.sessionFactory;
 import com.Seavus.Library.UI.AppInfoUI;
 import com.Seavus.Library.UI.Impl.AppInfoImpl;
 
@@ -17,10 +17,10 @@ public class LibraryHibernateAppPublication {
 		HibernateLoanController loanController = new HibernateLoanController();
 		
 		AppInfoUI appInfo = new AppInfoImpl();
-		Factory.createSessionFactory();
-		controller.setFactory(Factory.getFactory());
-		memberController.setFactory(Factory.getFactory());
-		loanController.setFactory(Factory.getFactory());
+		sessionFactory.createSessionFactory();
+		controller.setFactory(sessionFactory.getFactory());
+		memberController.setFactory(sessionFactory.getFactory());
+		loanController.setFactory(sessionFactory.getFactory());
 		appInfo.AppInfo();
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
