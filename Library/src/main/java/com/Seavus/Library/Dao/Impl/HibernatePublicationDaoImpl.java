@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -19,25 +17,15 @@ import com.Seavus.Library.Model.Magazine;
 import com.Seavus.Library.Model.Member;
 import com.Seavus.Library.Model.Membership;
 import com.Seavus.Library.Model.Publication;
+import com.Seavus.Library.Templates.Hibernate.HibernateDaoTemplate;
 
 public class HibernatePublicationDaoImpl implements HibernatePublicationDao {
 
 	private SessionFactory sessionFactory;
+	private HibernateDaoTemplate template = new HibernateDaoTemplate();
 
 	public void register(Publication object) {
-		Transaction tx = null;
-		Session session = sessionFactory.openSession();
-		try {
-			tx = session.beginTransaction();
-			session.save(object);
-			tx.commit();
-		} catch (RuntimeException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			session.close();
-		}
+		template.registerTransaction(sessionFactory, object);
 	}
 
 	public List<Publication> list() {
@@ -56,36 +44,11 @@ public class HibernatePublicationDaoImpl implements HibernatePublicationDao {
 	}
 
 	public void update(Publication object) {
-		Transaction tx = null;
-		Session session = sessionFactory.openSession();
-
-		try {
-			tx = session.beginTransaction();
-			session.update(object);
-			tx.commit();
-		} catch (RuntimeException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			session.close();
-		}
+		template.updateTransaction(sessionFactory, object);
 	}
 
 	public void unregister(long id) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.delete((Book) session.get(Book.class, id));
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
+		template.deleteBookTransaction(sessionFactory, id);
 	}
 
 	public void createSessionFactory() {
@@ -110,27 +73,12 @@ public class HibernatePublicationDaoImpl implements HibernatePublicationDao {
 	}
 
 	public void closeFactory() {
-		if (this.sessionFactory != null) {
-			this.sessionFactory.close();
-		}
+		template.closeFactory(this.sessionFactory);
 	}
 
 	public Publication getPublicationById(long id) {
-		Transaction tx = null;
-		Session session = sessionFactory.openSession();
 		Publication publication = null;
-		
-		try {
-			tx = session.beginTransaction();
-			publication = (Publication) session.get(Publication.class, id);
-			tx.commit();
-		} catch (RuntimeException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			session.close();
-		}
+		template.getPublicationById(sessionFactory, publication, id);
 		return publication;
 	}
 

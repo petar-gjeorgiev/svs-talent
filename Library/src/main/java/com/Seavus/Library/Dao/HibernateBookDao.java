@@ -30,5 +30,4 @@ public interface HibernateBookDao {
 	public void createSessionFactory();
 
 	public void closeFactory();
-
 }

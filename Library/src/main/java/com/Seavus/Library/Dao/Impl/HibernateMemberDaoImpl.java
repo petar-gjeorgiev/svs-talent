@@ -6,30 +6,19 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import com.Seavus.Library.Dao.HibernateMemberDao;
 import com.Seavus.Library.Model.Member;
 import com.Seavus.Library.Model.Membership;
+import com.Seavus.Library.Templates.Hibernate.HibernateDaoTemplate;
 
 public class HibernateMemberDaoImpl implements HibernateMemberDao {
 
 	private SessionFactory sessionFactory = null;
-
+	private HibernateDaoTemplate template = new HibernateDaoTemplate();
+	
 	public void register(Member object) {
-		Transaction tx = null;
-		Session session = sessionFactory.openSession();
-		try {
-			tx = session.beginTransaction();
-			session.save(object);
-			tx.commit();
-		} catch (RuntimeException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			session.close();
-		}
+		template.registerTransaction(sessionFactory, object);
 	}
 
 	public void setFactory(SessionFactory factory) {
@@ -37,42 +26,16 @@ public class HibernateMemberDaoImpl implements HibernateMemberDao {
 	}
 
 	public void closeFactory() {
-		if (this.sessionFactory != null) {
-			this.sessionFactory.close();
-		}
+		template.closeFactory(this.sessionFactory);
 	}
 
 	public void registerMemberShip(Membership registerMembership) {
-		Transaction tx = null;
-		Session session = sessionFactory.openSession();
-		try {
-			tx = session.beginTransaction();
-			session.save(registerMembership);
-			tx.commit();
-		} catch (RuntimeException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			session.close();
-		}
+		template.registerTransaction(sessionFactory, registerMembership);
 	}
 
 	public Member getMemberById(long id) {
-		Transaction tx = null;
-		Session session = sessionFactory.openSession();
 		Member member = new Member();
-		try {
-			tx = session.beginTransaction();
-			member = (Member) session.get(Member.class, id);
-			tx.commit();
-		} catch (RuntimeException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			session.close();
-		}
+		template.getMemberById(sessionFactory, member, id);
 		return member;
 	}
 

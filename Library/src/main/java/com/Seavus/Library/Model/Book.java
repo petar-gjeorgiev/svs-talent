@@ -2,22 +2,12 @@ package com.Seavus.Library.Model;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.Id;
-//import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue("book")
-//@Table(name = "Book_Hibernate")
 public class Book extends Publication {
 
-	//@Id
-	//@GeneratedValue
-	//private long id;
-
 	private String isbn;
-
-	//private String title;
 
 	public Book() {
 

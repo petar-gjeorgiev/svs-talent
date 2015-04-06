@@ -4,35 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import com.Seavus.Library.Dao.HibernateBookDao;
 import com.Seavus.Library.Model.Book;
+import com.Seavus.Library.Templates.Hibernate.HibernateDaoTemplate;
 
 public class HibernateBookDaoImpl implements HibernateBookDao {
+
+	private HibernateDaoTemplate template = new HibernateDaoTemplate();
 
 	private SessionFactory sessionFactory = null;
 
 	public void register(Book object) {
-		Transaction tx = null;
-		Session session = sessionFactory.openSession();
-		try {
-			tx = session.beginTransaction();
-			session.save(object);
-			tx.commit();
-		} catch (RuntimeException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			session.close();
-		}
+		template.registerTransaction(sessionFactory, object);
 	}
 
 	public List<Book> list() {
@@ -52,39 +41,16 @@ public class HibernateBookDaoImpl implements HibernateBookDao {
 	}
 
 	public void update(Book object) {
-
-		Transaction tx = null;
-		Session session = sessionFactory.openSession();
-
-		try {
-			tx = session.beginTransaction();
-			session.update(object);
-			tx.commit();
-		} catch (RuntimeException e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			session.close();
-		}
+		template.updateTransaction(sessionFactory, object);
 	}
 
 	public void unregister(long id) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			session.delete((Book) session.get(Book.class, id));
-			tx.commit();
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
+		template.deleteBookTransaction(sessionFactory, id);
 	}
 
+	/**
+	 * Made for the first versions .. Not needed
+	 */
 	public void createSessionFactory() {
 		if (sessionFactory == null) {
 			Configuration configuration = new Configuration();
@@ -98,9 +64,7 @@ public class HibernateBookDaoImpl implements HibernateBookDao {
 	}
 
 	public void closeFactory() {
-		if (this.sessionFactory != null) {
-			this.sessionFactory.close();
-		}
+		template.closeFactory(this.sessionFactory);
 	}
 
 }
