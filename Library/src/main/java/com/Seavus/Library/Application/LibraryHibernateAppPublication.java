@@ -2,7 +2,9 @@ package com.Seavus.Library.Application;
 
 import java.util.Scanner;
 
+import com.Seavus.Library.Controller.HibernateMemberController;
 import com.Seavus.Library.Controller.HibernatePublicationController;
+import com.Seavus.Library.Factory.Factory;
 import com.Seavus.Library.UI.AppInfoUI;
 import com.Seavus.Library.UI.Impl.AppInfoImpl;
 
@@ -10,9 +12,12 @@ public class LibraryHibernateAppPublication {
 	
 	public static void main(String[] args) {
 		HibernatePublicationController controller = new HibernatePublicationController();
+		HibernateMemberController memberController = new HibernateMemberController();
+		Factory sessionFactory = new Factory();
 		AppInfoUI appInfo = new AppInfoImpl();
-		
-		controller.createSessionFactory();
+		sessionFactory.createSessionFactory();
+		controller.setFactory(sessionFactory.getFactory());
+		memberController.setFactory(sessionFactory.getFactory());
 		appInfo.AppInfo();
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
@@ -80,6 +85,11 @@ public class LibraryHibernateAppPublication {
 				}
 				appInfo.AppInfo();
 			}
+			if(line.equals("2")) {
+				memberController.registerMember();
+				memberController.registerMembership();
+			}
+			
 		}
 		controller.closeFactory();
 	}

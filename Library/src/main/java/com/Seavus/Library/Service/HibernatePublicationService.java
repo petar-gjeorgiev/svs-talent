@@ -2,11 +2,11 @@ package com.Seavus.Library.Service;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+
 import com.Seavus.Library.Model.Publication;
 
 public interface HibernatePublicationService {
-
-	public void createSessionFactory();
 
 	public void update(Publication b);
 
@@ -17,5 +17,8 @@ public interface HibernatePublicationService {
 	public void unregister(long id);
 
 	public void closeSession();
+
+	public void setFactory(SessionFactory factory);
 	
+	public void closeFactory();
 }

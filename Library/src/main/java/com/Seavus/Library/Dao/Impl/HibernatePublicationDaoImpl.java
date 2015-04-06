@@ -14,12 +14,15 @@ import org.hibernate.service.ServiceRegistry;
 
 import com.Seavus.Library.Dao.HibernatePublicationDao;
 import com.Seavus.Library.Model.Book;
+import com.Seavus.Library.Model.Loan;
 import com.Seavus.Library.Model.Magazine;
+import com.Seavus.Library.Model.Member;
+import com.Seavus.Library.Model.Membership;
 import com.Seavus.Library.Model.Publication;
 
 public class HibernatePublicationDaoImpl implements HibernatePublicationDao {
 
-	private SessionFactory sessionFactory = null;
+	private SessionFactory sessionFactory;
 
 	public void register(Publication object) {
 		Transaction tx = null;
@@ -91,10 +94,19 @@ public class HibernatePublicationDaoImpl implements HibernatePublicationDao {
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 					.applySettings(configuration.getProperties()).build();
 
-			SessionFactory sessionFactory = configuration.addAnnotatedClass(
-					Book.class).addAnnotatedClass(Magazine.class).buildSessionFactory(serviceRegistry);
+			SessionFactory sessionFactory = configuration
+					.addAnnotatedClass(Book.class)
+					.addAnnotatedClass(Magazine.class)
+					.addAnnotatedClass(Loan.class)
+					.addAnnotatedClass(Member.class)
+					.addAnnotatedClass(Membership.class)
+					.buildSessionFactory(serviceRegistry);
 			this.sessionFactory = sessionFactory;
 		}
+	}
+
+	public void setFactory(SessionFactory factory) {
+		this.sessionFactory = factory;
 	}
 
 	public void closeFactory() {
@@ -102,5 +114,5 @@ public class HibernatePublicationDaoImpl implements HibernatePublicationDao {
 			this.sessionFactory.close();
 		}
 	}
-
+	
 }

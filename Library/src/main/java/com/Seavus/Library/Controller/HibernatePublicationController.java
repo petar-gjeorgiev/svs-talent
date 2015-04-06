@@ -1,5 +1,7 @@
 package com.Seavus.Library.Controller;
 
+import org.hibernate.SessionFactory;
+
 import com.Seavus.Library.Service.HibernatePublicationService;
 import com.Seavus.Library.Service.Impl.HibernatePublicationServiceImpl;
 import com.Seavus.Library.UI.InputBookUI;
@@ -23,6 +25,10 @@ public class HibernatePublicationController {
 	
 	public void registerBook() {
 		service.register(input.RegisterInput());
+	}
+	
+	public void setFactory(SessionFactory factory) {
+		service.setFactory(factory);
 	}
 	
 	public void appBookInfo() {
@@ -69,10 +75,7 @@ public class HibernatePublicationController {
 		outputMagazine.appInfo();
 	}
 	
-	public void createSessionFactory() {
-		service.createSessionFactory();
-	}
-	
+
 	public void closeFactory() {
 		service.closeSession();
 	}

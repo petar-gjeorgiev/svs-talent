@@ -2,6 +2,8 @@ package com.Seavus.Library.Service.Impl;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+
 import com.Seavus.Library.Dao.HibernatePublicationDao;
 import com.Seavus.Library.Dao.Impl.HibernatePublicationDaoImpl;
 import com.Seavus.Library.Model.Publication;
@@ -12,9 +14,6 @@ public class HibernatePublicationServiceImpl implements
 
 	HibernatePublicationDao publicationDao = new HibernatePublicationDaoImpl();
 
-	public void createSessionFactory() {
-		publicationDao.createSessionFactory();
-	}
 
 	public void update(Publication b) {
 		publicationDao.update(b);
@@ -35,5 +34,14 @@ public class HibernatePublicationServiceImpl implements
 	public void closeSession() {
 		publicationDao.closeFactory();
 	}
+
+	public void setFactory(SessionFactory factory) {
+		publicationDao.setFactory(factory);
+	}
+
+	public void closeFactory() {
+		publicationDao.closeFactory();
+	}
+
 
 }

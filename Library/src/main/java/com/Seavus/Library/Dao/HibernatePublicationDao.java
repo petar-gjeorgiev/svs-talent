@@ -2,6 +2,8 @@ package com.Seavus.Library.Dao;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+
 import com.Seavus.Library.Model.Publication;
 
 public interface HibernatePublicationDao {
@@ -14,8 +16,8 @@ public interface HibernatePublicationDao {
 
 	public void unregister(long id);
 
-	public void createSessionFactory();
-
+	public void setFactory(SessionFactory factory);
+	
 	public void closeFactory();
 	
 }
