@@ -4,6 +4,14 @@ import java.util.List;
 
 import com.Seavus.Library.Model.Book;
 
+/**
+ * 
+ * @author Petar Gjeorgiev
+ * No need for this interfac
+ * This interface is written for the first version of the app
+ *
+ */
+
 public interface HibernateBookService {
 
 	public void createSessionFactory();

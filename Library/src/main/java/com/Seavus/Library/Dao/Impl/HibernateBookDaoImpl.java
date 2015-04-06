@@ -45,7 +45,7 @@ public class HibernateBookDaoImpl implements HibernateBookDao {
 		List<Book> results = cr.list();
 
 		for (Book b : results) {
-			books.add(new Book(b.getId(), b.getIsbn(), b.getTitle()));
+			books.add(b);
 		}
 		session.close();
 		return books;
