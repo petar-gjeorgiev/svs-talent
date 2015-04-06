@@ -2,6 +2,7 @@ package com.Seavus.Library.Application;
 
 import java.util.Scanner;
 
+import com.Seavus.Library.Controller.HibernateLoanController;
 import com.Seavus.Library.Controller.HibernateMemberController;
 import com.Seavus.Library.Controller.HibernatePublicationController;
 import com.Seavus.Library.Factory.Factory;
@@ -13,11 +14,13 @@ public class LibraryHibernateAppPublication {
 	public static void main(String[] args) {
 		HibernatePublicationController controller = new HibernatePublicationController();
 		HibernateMemberController memberController = new HibernateMemberController();
-		Factory sessionFactory = new Factory();
+		HibernateLoanController loanController = new HibernateLoanController();
+		
 		AppInfoUI appInfo = new AppInfoImpl();
-		sessionFactory.createSessionFactory();
-		controller.setFactory(sessionFactory.getFactory());
-		memberController.setFactory(sessionFactory.getFactory());
+		Factory.createSessionFactory();
+		controller.setFactory(Factory.getFactory());
+		memberController.setFactory(Factory.getFactory());
+		loanController.setFactory(Factory.getFactory());
 		appInfo.AppInfo();
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
@@ -40,6 +43,7 @@ public class LibraryHibernateAppPublication {
 							
 							if(line.equals("1")) {
 								controller.registerBook();
+								System.out.println("Successful registration\n");
 							}
 							
 							if(line.equals("2")) {
@@ -48,6 +52,7 @@ public class LibraryHibernateAppPublication {
 							
 							if(line.equals("3")) {
 								controller.updateBook();
+								
 							}
 							
 							if(line.equals("4")) {
@@ -77,6 +82,7 @@ public class LibraryHibernateAppPublication {
 								controller.unregisterMagazine();
 							}
 						}
+						controller.appMagazineInfo();
 					}
 					
 					if(line.equals("3")) {
@@ -88,6 +94,10 @@ public class LibraryHibernateAppPublication {
 			if(line.equals("2")) {
 				memberController.registerMember();
 				memberController.registerMembership();
+			}
+			
+			if(line.equals("3")) {
+				loanController.registerLoan();
 			}
 			
 		}

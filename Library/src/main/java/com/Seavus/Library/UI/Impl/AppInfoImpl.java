@@ -10,6 +10,7 @@ public class AppInfoImpl implements AppInfoUI {
 		sb.append("This is the main menu\n");
 		sb.append("1 - Publications\n");
 		sb.append("2 - Add Member\n");
+		sb.append("3 - Add Loan\n");
 		sb.append("end - Terminate app");
 		System.out.println(sb.toString());
 	}

@@ -19,6 +19,8 @@ public interface HibernatePublicationService {
 	public void closeSession();
 
 	public void setFactory(SessionFactory factory);
-	
+
 	public void closeFactory();
+
+	public Publication getPublicationById(long id);
 }

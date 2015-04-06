@@ -24,6 +24,10 @@ public class Loan {
 	@ManyToOne
 	private Publication publication;
 
+	public Loan() {
+		
+	}
+	
 	public Loan(long id, Date startDate, Date endDate, Member member,
 			Publication publication) {
 		this.id = id;

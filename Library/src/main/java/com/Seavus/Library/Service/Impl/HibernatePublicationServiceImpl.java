@@ -43,5 +43,9 @@ public class HibernatePublicationServiceImpl implements
 		publicationDao.closeFactory();
 	}
 
+	public Publication getPublicationById(long id) {
+		return publicationDao.getPublicationById(id);
+	}
+
 
 }

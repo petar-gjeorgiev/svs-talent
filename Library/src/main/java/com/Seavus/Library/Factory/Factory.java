@@ -13,32 +13,32 @@ import com.Seavus.Library.Model.Membership;
 
 public class Factory {
 
-	private SessionFactory sessionFactory;
-	
-	public void createSessionFactory() {
+	private static SessionFactory sessionFactory;
+		
+	public static void createSessionFactory() {
 		if (sessionFactory == null) {
 			Configuration configuration = new Configuration();
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 					.applySettings(configuration.getProperties()).build();
 
-			SessionFactory sessionFactory = configuration
+			SessionFactory SessionFactory = configuration
 					.addAnnotatedClass(Book.class)
 					.addAnnotatedClass(Magazine.class)
 					.addAnnotatedClass(Loan.class)
 					.addAnnotatedClass(Member.class)
 					.addAnnotatedClass(Membership.class)
 					.buildSessionFactory(serviceRegistry);
-			this.sessionFactory = sessionFactory;
+			sessionFactory = SessionFactory;
 		}
 	}
 
-	public SessionFactory getFactory() {
+	public static SessionFactory getFactory() {
 		return sessionFactory;
 	}
 
-	public void closeFactory() {
-		if (this.sessionFactory != null) {
-			this.sessionFactory.close();
+	public static void closeFactory() {
+		if (sessionFactory != null) {
+			sessionFactory.close();
 		}
 	}
 	

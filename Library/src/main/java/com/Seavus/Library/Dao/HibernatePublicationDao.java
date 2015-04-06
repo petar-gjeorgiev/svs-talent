@@ -20,4 +20,6 @@ public interface HibernatePublicationDao {
 	
 	public void closeFactory();
 	
+	public Publication getPublicationById(long id);
+	
 }

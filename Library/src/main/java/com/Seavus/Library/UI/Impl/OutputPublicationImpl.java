@@ -66,7 +66,7 @@ public class OutputPublicationImpl implements OutputUI {
 		sb.append("1 - Book\n");
 		sb.append("2 - Magazine\n");
 		sb.append("3 - List all publications\n");
-		sb.append("4 - exit menu\n");
+		sb.append("end - exit menu\n");
 		System.out.println(sb.toString());
 	}
 

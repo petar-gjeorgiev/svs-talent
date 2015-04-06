@@ -114,5 +114,24 @@ public class HibernatePublicationDaoImpl implements HibernatePublicationDao {
 			this.sessionFactory.close();
 		}
 	}
-	
+
+	public Publication getPublicationById(long id) {
+		Transaction tx = null;
+		Session session = sessionFactory.openSession();
+		Publication publication = null;
+		
+		try {
+			tx = session.beginTransaction();
+			publication = (Publication) session.get(Publication.class, id);
+			tx.commit();
+		} catch (RuntimeException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return publication;
+	}
+
 }
