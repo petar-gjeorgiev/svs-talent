@@ -35,7 +35,7 @@ public class AliExpress {
 			System.out.println("To end inserting type \"end\".\n");
 			scanner = new Scanner(System.in);
 			addProductsToBasket(scanner);
-			shoppingBasket.listAllProducts();
+			shoppingBasket.ListAllProducts();
 		} catch (InvalidInputException e) {
 			System.err.println(e.getMessage());
 		} catch (QuantityException | InvalidProductException e) {

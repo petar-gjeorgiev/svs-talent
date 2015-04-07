@@ -18,7 +18,7 @@ public class HibernateBookDaoImpl implements HibernateBookDao {
 
 	private HibernateDaoTemplate template = new HibernateDaoTemplate();
 
-	private SessionFactory sessionFactory = null;
+	private SessionFactory sessionFactory;
 
 	public void register(Book object) {
 		template.registerTransaction(sessionFactory, object);
@@ -37,7 +37,7 @@ public class HibernateBookDaoImpl implements HibernateBookDao {
 			books.add(b);
 		}
 		session.close();
-		return books;
+		return results;
 	}
 
 	public void update(Book object) {

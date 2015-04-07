@@ -1,6 +1,5 @@
 package com.Seavus.Library.Dao.Impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -14,9 +13,9 @@ import com.Seavus.Library.Templates.Hibernate.HibernateDaoTemplate;
 
 public class HibernateMemberDaoImpl implements HibernateMemberDao {
 
-	private SessionFactory sessionFactory = null;
+	private SessionFactory sessionFactory;
 	private HibernateDaoTemplate template = new HibernateDaoTemplate();
-	
+
 	public void register(Member object) {
 		template.registerTransaction(sessionFactory, object);
 	}
@@ -39,19 +38,12 @@ public class HibernateMemberDaoImpl implements HibernateMemberDao {
 		return member;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Member> listAllMembers() {
-		List<Member> members = new ArrayList<Member>();
 		Session session = sessionFactory.openSession();
 		Criteria cr = session.createCriteria(Member.class);
-
-		@SuppressWarnings("unchecked")
-		List<Member> results = cr.list();
-
-		for (Member m : results) {
-			members.add(m);
-		}
 		session.close();
-		return members;
+		return cr.list();
 	}
 
 }

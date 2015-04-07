@@ -13,23 +13,23 @@ import com.Seavus.Library.Templates.JDBC.JDBCDaoTemplate;
 public class JDBCBookDaoImpl implements JDBCBookDao {
 
 
-	public JDBCDaoTemplate chef = new JDBCDaoTemplate();
+	public JDBCDaoTemplate template = new JDBCDaoTemplate();
 
 	public void register(Book book) {
-		chef.execute(new BookRegisterSetter(book));
+		template.execute(new BookRegisterSetter(book));
 
 	}
 
 	public List<Book> list() {
-		return chef.executeList(new BookListSetter());
+		return template.executeList(new BookListSetter());
 	}
 
 	public void update(Book book) {
-		chef.execute(new BookUpdateSetter(book));
+		template.execute(new BookUpdateSetter(book));
 	}
 
 	public void unregister(long id1) {
-		chef.execute(new BookUnregisterSetter(id1));
+		template.execute(new BookUnregisterSetter(id1));
 	}
 
 }

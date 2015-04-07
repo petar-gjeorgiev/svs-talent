@@ -8,7 +8,7 @@ import com.Seavus.Library.Templates.Hibernate.HibernateDaoTemplate;
 
 public class HibernateLoanDaoImpl implements HibernateLoanDao {
 
-	private SessionFactory sessionFactory = null;
+	private SessionFactory sessionFactory;
 	private HibernateDaoTemplate template = new HibernateDaoTemplate();
 
 	public void register(Loan object) {

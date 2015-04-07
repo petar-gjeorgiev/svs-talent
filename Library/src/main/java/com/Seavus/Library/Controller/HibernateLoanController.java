@@ -2,7 +2,7 @@ package com.Seavus.Library.Controller;
 
 import org.hibernate.SessionFactory;
 
-import com.Seavus.Library.Factory.sessionFactory;
+import com.Seavus.Library.Factory.Factory;
 import com.Seavus.Library.Model.Loan;
 import com.Seavus.Library.Service.HibernateLoanService;
 import com.Seavus.Library.Service.HibernateMemberService;
@@ -21,8 +21,8 @@ public class HibernateLoanController {
 	public LoanInputUI input = new LoanInputImpl();
 
 	public void registerLoan() {
-		pubService.setFactory(sessionFactory.getFactory());
-		memService.setFactory(sessionFactory.getFactory());
+		pubService.setFactory(Factory.getFactory());
+		memService.setFactory(Factory.getFactory());
 		Loan loan = input.registerLoan(pubService, memService);
 		service.register(loan);
 	}
