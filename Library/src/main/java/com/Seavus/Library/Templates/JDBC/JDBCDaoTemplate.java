@@ -13,7 +13,7 @@ public class JDBCDaoTemplate {
 
 	public static final String USERNAME = "postgres";
 
-	public static final String PASSWORD = "postgres";
+	public static final String PASSWORD = "library1!";
 
 	public static Connection connection;
 

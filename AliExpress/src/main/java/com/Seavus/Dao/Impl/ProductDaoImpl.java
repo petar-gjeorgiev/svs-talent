@@ -14,7 +14,7 @@ import com.Seavus.AliExpress.Model.Product;
 
 public class ProductDaoImpl implements ProductDao {
 
-	public static Connection connection;
+	public  Connection connection;
 
 	@Override
 	public Product getProductById(String id) {
@@ -22,9 +22,7 @@ public class ProductDaoImpl implements ProductDao {
 		Product p = new Product();
 
 		try {
-			connection = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/AliExpress", "postgres",
-					"library1!");
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/AliExpress", "postgres","library1!");
 
 			String sql = "select * from product where id = ?";
 			PreparedStatement preparedStatement = connection
@@ -92,7 +90,6 @@ public class ProductDaoImpl implements ProductDao {
 			connection = DriverManager.getConnection(
 					"jdbc:postgresql://localhost:5432/AliExpress", "postgres",
 					"library1!");
-
 			String sql = "insert into product(name,price,quantity) values(?,?,?)";
 			PreparedStatement preparedStatement = connection
 					.prepareStatement(sql);

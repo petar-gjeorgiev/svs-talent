@@ -23,8 +23,8 @@ public class HibernatePublicationDaoImpl implements HibernatePublicationDao {
 	public List<Publication> list() {
 		Session session = sessionFactory.openSession();
 		Criteria cr = session.createCriteria(Publication.class);
-	//	session.close();
 		return cr.list();
+	//	return template.listAllPublications(sessionFactory).list();
 	}
 
 	public void update(Publication object) {

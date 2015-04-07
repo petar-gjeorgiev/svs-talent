@@ -19,12 +19,11 @@ public class FillWarehouseImpl implements FillWarehouseDao {
 		try {
 			scanner = new Scanner(
 					new File(
-							"E:/Petar Gjeorgiev/git/svs-talent/SVS-HOMEWORK/src/InputOutput/AliExpress/Products.txt")); // Absolute
+							"C:/Users/student/Documents/PG/git/svs-talent/AliExpress/src/main/java/com/Seavus/AliExpress/Products.txt")); // Absolute
 																														// path
 																														// to
 																														// Products.txt
 																														// file
-
 			String line = "";
 
 			while (scanner.hasNextLine()) {

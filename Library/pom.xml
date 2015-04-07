@@ -5,6 +5,12 @@
 	<artifactId>Library</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.2.3.RELEASE</version>
+	</parent>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -16,5 +22,6 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>4.3.6.Final</version>
 		</dependency>
+		
 	</dependencies>
 </project>

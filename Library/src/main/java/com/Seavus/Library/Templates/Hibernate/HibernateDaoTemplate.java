@@ -1,8 +1,6 @@
 package com.Seavus.Library.Templates.Hibernate;
 
 
-import javassist.bytecode.stackmap.TypeData.ClassName;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -53,7 +51,7 @@ public class HibernateDaoTemplate {
 	
 	private HibernateSessionCriteriaSetter listSetter = new HibernateSessionCriteriaSetter() {
 		
-		public Criteria setSession(Session session, ClassName clName) {
+		public Criteria setSession(Session session, String clName) {
 			return session.createCriteria(clName.getClass());
 		}
 	};
@@ -105,7 +103,7 @@ public class HibernateDaoTemplate {
 	
 	public Criteria listAllPublications(SessionFactory factory) {
 		transaction(factory);
-		Criteria res = listSetter.setSession(session, new ClassName("Publication"));
+		Criteria res = listSetter.setSession(session, "Publication");
 		commit();
 		return res;
 	}
