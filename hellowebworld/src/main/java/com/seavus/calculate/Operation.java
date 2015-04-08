@@ -1,4 +1,4 @@
-package com.seavus.hellowebworld;
+package com.seavus.calculate;
 
 public class Operation {
 
@@ -9,17 +9,6 @@ public class Operation {
 	private OperationType type;
 
 	private int result;
-
-	public Operation() {
-
-	}
-
-	public Operation(int operand1, int operand2, OperationType type, int result) {
-		this.operand1 = operand1;
-		this.operand2 = operand2;
-		this.type = type;
-		this.result = result;
-	}
 
 	public int getOperand1() {
 		return operand1;

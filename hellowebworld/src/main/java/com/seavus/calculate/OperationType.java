@@ -1,4 +1,4 @@
-package com.seavus.hellowebworld;
+package com.seavus.calculate;
 
 public enum OperationType {
 

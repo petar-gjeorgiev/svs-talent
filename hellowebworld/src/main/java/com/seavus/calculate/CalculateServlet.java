@@ -1,4 +1,4 @@
-package com.seavus.hellowebworld;
+package com.seavus.calculate;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+@SuppressWarnings("serial")
 @WebServlet("/calculate")
 public class CalculateServlet extends HttpServlet {
 
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -22,28 +22,40 @@ public class CalculateServlet extends HttpServlet {
 		String type = req.getParameter("operation");
 		Integer operand1 = Integer.parseInt(req.getParameter("operandOne"));
 		Integer operand2 = Integer.parseInt(req.getParameter("operandTwo"));
-		int res = 0;
+		int res;
+		Operation operation = new Operation();
+		operation.setOperand1(operand1);
+		operation.setOperand2(operand2);
+
 		HttpSession session = req.getSession();
-		if(session.getAttribute("operation") == null) {
+		if (session.getAttribute("operation") == null) {
 			List<Operation> operations = new ArrayList<Operation>();
 			session.setAttribute("operation", operations);
 		}
-		
+
 		if (type.equals("ADD")) {
 			res = operand1 + operand2;
-			List<Operation> operations = (List<Operation>) session.getAttribute("operation");
-			operations.add(new Operation(operand1, operand2, OperationType.ADD,res));
-			session.setAttribute("operation",operations);
+			operation.setResult(res);
+			operation.setType(OperationType.ADD);
+			@SuppressWarnings("unchecked")
+			List<Operation> operations = (List<Operation>) session
+					.getAttribute("operation");
+			operations.add(operation);
+			session.setAttribute("operation", operations);
 		}
 		if (type.equalsIgnoreCase("SUBSTRACT")) {
 			res = operand1 - operand2;
-			List<Operation> operations = (List<Operation>) session.getAttribute("operation");
-			operations.add(new Operation(operand1, operand2, OperationType.SUBSTRACT,res));
+			operation.setResult(res);
+			operation.setType(OperationType.SUBSTRACT);
+			@SuppressWarnings("unchecked")
+			List<Operation> operations = (List<Operation>) session
+					.getAttribute("operation");
+			operations.add(operation);
 			session.setAttribute("operation", operations);
 		}
 		System.out.println("DO GET\n");
 
-		printMessage(req, resp, res, operand1, operand2);
+		printMessage(req, resp, operation);
 	}
 
 	@Override
@@ -54,37 +66,47 @@ public class CalculateServlet extends HttpServlet {
 		Integer operand1 = Integer.parseInt(req.getParameter("operandOne"));
 		Integer operand2 = Integer.parseInt(req.getParameter("operandTwo"));
 		int res = 0;
+		Operation operation = new Operation();
+		operation.setOperand1(operand1);
+		operation.setOperand2(operand2);
 
 		HttpSession session = req.getSession();
-		if(session.getAttribute("operation") == null) {
+		if (session.getAttribute("operation") == null) {
 			List<Operation> operations = new ArrayList<Operation>();
 			session.setAttribute("operation", operations);
 		}
-		
+
 		if (type.equals("ADD")) {
 			res = operand1 + operand2;
+			operation.setResult(res);
+			operation.setType(OperationType.ADD);
 			@SuppressWarnings("unchecked")
-			List<Operation> operations = (List<Operation>) session.getAttribute("operation");
-			operations.add(new Operation(operand1, operand2, OperationType.ADD,res));
-			session.setAttribute("operation",operations);
+			List<Operation> operations = (List<Operation>) session
+					.getAttribute("operation");
+			operations.add(operation);
+			session.setAttribute("operation", operations);
 		}
 		if (type.equalsIgnoreCase("SUBSTRACT")) {
 			res = operand1 - operand2;
-			List<Operation> operations = (List<Operation>) session.getAttribute("operation");
-			operations.add(new Operation(operand1, operand2, OperationType.SUBSTRACT,res));
+			operation.setResult(res);
+			operation.setType(OperationType.SUBSTRACT);
+			@SuppressWarnings("unchecked")
+			List<Operation> operations = (List<Operation>) session
+					.getAttribute("operation");
+			operations.add(operation);
 			session.setAttribute("operation", operations);
 		}
 		System.out.println("DO POST\n");
 
-		printMessage(req, resp, res, operand1, operand2);
+		printMessage(req, resp, operation);
 	}
 
 	private void printMessage(HttpServletRequest req, HttpServletResponse resp,
-			int res, Integer op1, Integer op2) throws IOException {
+			Operation o) throws IOException {
 
 		resp.setContentType("text/html");
-		resp.getWriter().println("Operand1: " + op1 + " Operand2: " + op2 + " Result: " + res);
-		
-	}
+		resp.getWriter().println("Operation:<br/>");
+		resp.getWriter().println(o + "<br/>");
 
+	}
 }

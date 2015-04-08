@@ -1,0 +1,9 @@
+DO GET format:
+http://localhost:8080/calculate?operation=SUBSTRACT&operandOne=4&operandTwo=3
+http://localhost:8080/calculate?operation=ADD&operandOne=4&operandTwo=3
+
+HISTORY format:
+http://localhost:8080/history
+
+DO POST:
+with Calculate.html page
