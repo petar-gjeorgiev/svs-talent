@@ -1,10 +1,19 @@
 package com.Seavus.AliExpress.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "hibernate_basket")
 public class ShoppingBasket {
 
 	private int id;
 
 	private int sum;
+
+	@ManyToOne
+	private Bill bill;
 
 	public ShoppingBasket() {
 
@@ -29,6 +38,14 @@ public class ShoppingBasket {
 
 	public void setSum(int sum) {
 		this.sum = sum;
+	}
+
+	public Bill getBill() {
+		return bill;
+	}
+
+	public void setBill(Bill bill) {
+		this.bill = bill;
 	}
 
 }

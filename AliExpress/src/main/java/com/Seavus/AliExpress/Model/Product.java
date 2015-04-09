@@ -1,7 +1,17 @@
 package com.Seavus.AliExpress.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "product_hibernate")
 public class Product {
 
+	@Id
+	@GeneratedValue
 	private String id;
 
 	private String name;
@@ -10,6 +20,7 @@ public class Product {
 
 	private int quantity;
 
+	@ManyToOne
 	private Bill bill;
 
 	public Product() {

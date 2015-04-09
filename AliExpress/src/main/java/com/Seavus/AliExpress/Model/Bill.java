@@ -2,12 +2,24 @@ package com.Seavus.AliExpress.Model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "hibernate_bill")
 public class Bill {
 
+	@Id
+	@GeneratedValue
 	private int id;
 
+	@OneToMany(mappedBy = "bill")
 	private List<Product> products;
 
+	@OneToMany(mappedBy = "bill")
 	private List<ShoppingBasket> basket;
 
 	public Bill() {
