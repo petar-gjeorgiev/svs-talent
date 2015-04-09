@@ -11,11 +11,14 @@ public class FillWarehouseImpl implements FillWarehouseDao {
 
 	ProductDao productDao = new ProductDaoImpl();
 
-	@Override
 	public void fillWarehouse() {
 
+//		File f = new File(
+//				"C:/Users/student/Documents/PG/git/svs-talent/AliExpress/src/main/java/com/Seavus/AliExpress/Products.txt");
+		
 		File f = new File(
-				"C:/Users/student/Documents/PG/git/svs-talent/AliExpress/src/main/java/com/Seavus/AliExpress/Products.txt");
+				"C:/Users/student/Documents/PG/git/svs-talent/AliExpress/src/main/java/com/Seavus/AliExpress/inMemory/Products.txt");
+		
 		UI ui = new UI(f);
 		String line = "";
 

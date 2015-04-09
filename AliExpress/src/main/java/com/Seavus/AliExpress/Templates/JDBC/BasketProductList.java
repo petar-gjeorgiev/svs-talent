@@ -22,7 +22,6 @@ public class BasketProductList implements JDBCListSetter {
 		productDao = this.productDao;
 	}
 
-	@Override
 	public List<Product> execute(Connection connection) {
 		List<Product> products = new ArrayList<Product>();
 		try {

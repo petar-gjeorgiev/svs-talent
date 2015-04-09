@@ -12,17 +12,14 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 
 	public ShoppingBasketDao shoppingDao = new ShoppingBasketDaoImpl();
 
-	@Override
 	public void addProduct(ShoppingBasket basket, Product p) {
 		shoppingDao.addProduct(basket, p);
 	}
 
-	@Override
 	public List<Product> listAllProducts(ShoppingBasket basket) {
 		return shoppingDao.listAllProducts(basket);
 	}
 
-	@Override
 	public long calculateSum(ShoppingBasket basket) {
 		long sum = 0;
 		for (Product p : listAllProducts(basket)) {
@@ -31,12 +28,10 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 		return sum;
 	}
 
-	@Override
 	public void addBasket() {
 		shoppingDao.addBasket();
 	}
 
-	@Override
 	public ShoppingBasket getNewestBasket() {
 		return shoppingDao.getNewestBasket();
 	}

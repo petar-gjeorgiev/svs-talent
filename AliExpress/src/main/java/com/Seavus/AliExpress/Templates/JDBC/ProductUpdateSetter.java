@@ -14,7 +14,6 @@ public class ProductUpdateSetter implements JDBCSetter {
 		this.product = product;
 	}
 
-	@Override
 	public void execute(Connection connection) {
 		String id = product.getId();
 		String name = product.getName();

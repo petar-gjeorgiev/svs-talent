@@ -15,9 +15,8 @@ public class ProductRegisterSetter implements JDBCSetter {
 		this.product = product;
 	}
 
-	@Override
 	public void execute(Connection connection) {
-		String sql = "insert into book(id,name,price,quantity) values(?,?,?,?)";
+		String sql = "insert into product(id,name,price,quantity) values(?,?,?,?)";
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement(sql);

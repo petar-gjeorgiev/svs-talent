@@ -10,6 +10,7 @@ import com.Seavus.AliExpress.Templates.JDBC.BasketProductList;
 import com.Seavus.AliExpress.Templates.JDBC.BasketRegisterProduct;
 import com.Seavus.AliExpress.Templates.JDBC.BasketRegistration;
 import com.Seavus.AliExpress.Templates.JDBC.JDBCDaoTemplate;
+import com.Seavus.AliExpress.Templates.JDBC.NewestBasketSetter;
 
 public class ShoppingBasketDaoImpl implements ShoppingBasketDao {
 
@@ -17,26 +18,20 @@ public class ShoppingBasketDaoImpl implements ShoppingBasketDao {
 
 	public ProductDao productDao = new ProductDaoImpl();
 
-	@Override
 	public List<Product> listAllProducts(ShoppingBasket basket) {
 		return template.executeList(new BasketProductList(basket.getId(),
 				productDao));
 	}
-
-	@Override
 	public void addProduct(ShoppingBasket basket, Product p) {
 		template.execute(new BasketRegisterProduct(p.getId(), basket.getId()));
 	}
 
-	@Override
 	public void addBasket() {
 		template.execute(new BasketRegistration());
 	}
-
-	@Override
+	
 	public ShoppingBasket getNewestBasket() {
-		// TODO Auto-generated method stub
-		return null;
+		return template.executeNewestBasket(new NewestBasketSetter());
 	}
 
 }

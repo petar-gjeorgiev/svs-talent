@@ -11,12 +11,16 @@ public class Output {
 
 		Product p = new Product();
 		System.out.println("Product registration page:\n\n");
+		System.out.println("Product id:");
+		p.setId(input.getInput().nextLine());
 		System.out.println("Product name: ");
 		p.setName(input.getInput().nextLine());
 		System.out.println("Product price: ");
 		p.setPrice(Integer.parseInt(input.getInput().nextLine()));
 		System.out.println("Quantity: ");
 		p.setQuantity(Integer.parseInt(input.getInput().nextLine()));
+		System.out.println("\n\n");
+		AppInfo.appInfo();
 		return p;
 	}
 
@@ -40,7 +44,10 @@ public class Output {
 	public String removeProduct(UI input) {
 		System.out.println("Product unregister page:\n\n");
 		System.out.println("Product id: ");
-		return input.getInput().nextLine();
+		String line = input.getInput().nextLine();
+		System.out.println("\n\n");
+		AppInfo.appInfo();
+		return line;
 	}
 
 	public HashMap<String, Integer> addProductsToBasket(UI input,

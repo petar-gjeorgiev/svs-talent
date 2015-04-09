@@ -15,7 +15,6 @@ public class ProductByIdSetter implements JDBCProductSetter {
 		this.id = id;
 	}
 
-	@Override
 	public Product execute(Connection connection) {
 		Product p = new Product();
 		try {

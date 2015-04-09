@@ -9,7 +9,6 @@ import com.Seavus.AliExpress.Model.ShoppingBasket;
 
 public class NewestBasketSetter implements JDBCBasketSetter {
 
-	@Override
 	public ShoppingBasket execute(Connection connection) {
 		ShoppingBasket basket = new ShoppingBasket();
 		try {

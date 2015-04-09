@@ -8,7 +8,6 @@ public class FillWarehouseServiceImpl implements FillWarehouseService {
 
 	public FillWarehouseDao warehouseDao = new FillWarehouseImpl();
 	
-	@Override
 	public void fillWarehouse() {
 		warehouseDao.fillWarehouse();
 	}

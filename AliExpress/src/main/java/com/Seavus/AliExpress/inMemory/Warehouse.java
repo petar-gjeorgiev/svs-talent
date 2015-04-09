@@ -49,14 +49,16 @@ public class Warehouse implements ProductInterface {
 
 		Scanner scanner;
 		try {
-			scanner = new Scanner(
-					new File(
-							"D:/Education/Seavus/git/svs-talent/AliExpress/src/main/java/com/Seavus/AliExpress/Products.txt")); // Absolute
-																														// path
-																														// to
-																														// Products.txt
-																														// file
+//			scanner = new Scanner(
+//					new File(
+//							"D:/Education/Seavus/git/svs-talent/AliExpress/src/main/java/com/Seavus/AliExpress/Products.txt")); // Absolute
+//																														// path
+//																														// to
+//																														// Products.txt
+//																														// file
 
+			scanner = new Scanner(new File("C:/Users/student/Documents/PG/git/svs-talent/AliExpress/src/main/java/com/Seavus/AliExpress/inMemory/Products.txt"));
+			
 			String line = "";
 
 			while (scanner.hasNextLine()) {

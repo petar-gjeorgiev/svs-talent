@@ -11,27 +11,22 @@ public class ProductServiceImpl implements ProductService {
 
 	public ProductDao productDao = new ProductDaoImpl();
 
-	@Override
 	public Product getProductById(String id) {
 		return productDao.getProductById(id);
 	}
 
-	@Override
 	public void addProduct(Product p) {
 		productDao.addProduct(p);
 	}
 
-	@Override
 	public void removeProduct(String id) {
 		productDao.removeProduct(id);
 	}
 
-	@Override
 	public void updateProduct(Product p) {
 		productDao.updateProduct(p);
 	}
 
-	@Override
 	public List<Product> listAllProducts() {
 		return productDao.listAllProducts();
 	}

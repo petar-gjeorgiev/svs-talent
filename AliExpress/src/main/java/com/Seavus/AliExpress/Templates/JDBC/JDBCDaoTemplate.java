@@ -6,14 +6,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.Seavus.AliExpress.Model.Product;
+import com.Seavus.AliExpress.Model.ShoppingBasket;
 
 public class JDBCDaoTemplate {
 
-	public static final String DB = "jdbc:postgresql://localhost:5432/Library";
+	public static final String DB = "jdbc:postgresql://localhost:5432/AliExpress";
 
 	public static final String USERNAME = "postgres";
 
-	public static final String PASSWORD = "postgres";
+	public static final String PASSWORD = "library1!";
 
 	public static Connection connection;
 
@@ -35,6 +36,10 @@ public class JDBCDaoTemplate {
 	}
 
 	public List<Product> executeList(JDBCListSetter setter) {
+		return setter.execute(getConnection());
+	}
+	
+	public ShoppingBasket executeNewestBasket(JDBCBasketSetter setter) {
 		return setter.execute(connection);
 	}
 	

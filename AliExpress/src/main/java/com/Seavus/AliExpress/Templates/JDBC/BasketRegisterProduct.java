@@ -15,7 +15,6 @@ public class BasketRegisterProduct implements JDBCSetter {
 		this.basketId = basketId;
 	}
 
-	@Override
 	public void execute(Connection connection) {
 		String sql = "insert into bill (productId,basketId) values(?,?)";
 		PreparedStatement preparedStatement;

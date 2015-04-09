@@ -12,10 +12,9 @@ public class ProductUnregisterSetter implements JDBCSetter {
 		this.id = id;
 	}
 
-	@Override
 	public void execute(Connection connection) {
 		try {
-			String sql = "delete from product where id = " + id;
+			String sql = "delete from product where id = '" + id + "'";
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(sql);
 			statement.close();
