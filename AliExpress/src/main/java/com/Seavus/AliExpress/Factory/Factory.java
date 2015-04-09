@@ -1,21 +1,21 @@
 package com.Seavus.AliExpress.Factory;
 
-import java.util.Scanner;
-
-import com.Seavus.AliExpress.ShoppingBasket;
-import com.Seavus.AliExpress.Warehouse;
+import com.Seavus.AliExpress.IO.UI;
+import com.Seavus.AliExpress.inMemory.ShoppingBasket;
+import com.Seavus.AliExpress.inMemory.Warehouse;
 
 public class Factory {
 
-	public static Warehouse getWarehouseInstance () {
+	public static Warehouse getWarehouseInstance() {
 		return new Warehouse();
 	}
 
 	public static ShoppingBasket getBasketInstance() {
 		return new ShoppingBasket();
 	}
-	
-	public static Scanner scanner() {
-		return new Scanner(System.in);
+
+	public static UI Input() {
+		return new UI();
 	}
+
 }

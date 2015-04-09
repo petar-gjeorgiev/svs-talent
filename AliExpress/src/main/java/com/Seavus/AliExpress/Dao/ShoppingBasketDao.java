@@ -1,12 +1,17 @@
 package com.Seavus.AliExpress.Dao;
 
-import com.Seavus.AliExpress.Exceptions.EmptyShoppingBasketException;
+import java.util.List;
+
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Model.ShoppingBasket;
 
 public interface ShoppingBasketDao {
 
-	public void addProduct(ShoppingBasket basket,Product p, int quantity);
+	public void addProduct(ShoppingBasket basket,Product p);
 
-	public void ListAllProducts(ShoppingBasket basket) throws EmptyShoppingBasketException;
+	public List<Product> listAllProducts(ShoppingBasket basket) ;
+	
+	public void addBasket();
+	
+	public ShoppingBasket getNewestBasket();
 }

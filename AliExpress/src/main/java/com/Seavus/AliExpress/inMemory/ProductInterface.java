@@ -1,4 +1,4 @@
-package com.Seavus.AliExpress;
+package com.Seavus.AliExpress.inMemory;
 
 public interface ProductInterface {
 

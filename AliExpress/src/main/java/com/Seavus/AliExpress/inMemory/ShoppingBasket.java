@@ -1,4 +1,4 @@
-package com.Seavus.AliExpress;
+package com.Seavus.AliExpress.inMemory;
 
 import java.util.HashMap;
 
@@ -16,7 +16,10 @@ public class ShoppingBasket implements ShoppingCart {
 		basket.put(p, new Integer(quantity));
 	}
 
-	public void ListAllProducts() throws EmptyShoppingBasketException { // Not here in the controller
+	public void ListAllProducts() throws EmptyShoppingBasketException { // In
+																		// the
+																		// controller
+
 		StringBuilder sb = new StringBuilder();
 		int sum = 0;
 		String id = "ID";
@@ -34,9 +37,7 @@ public class ShoppingBasket implements ShoppingCart {
 					"There are no products in the shopping basket!");
 		}
 		sb.append("\nSum: " + sum);
-		System.out.println(sb.toString());
+		System.out.println("\n" + sb.toString());
 	}
-
-
 
 }

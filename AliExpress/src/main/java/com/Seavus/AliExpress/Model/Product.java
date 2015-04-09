@@ -1,6 +1,6 @@
 package com.Seavus.AliExpress.Model;
 
-public class Product implements Comparable<Product> {
+public class Product {
 
 	private String id;
 
@@ -10,10 +10,12 @@ public class Product implements Comparable<Product> {
 
 	private int quantity;
 
-	public Product () {
-		
+	private Bill bill;
+
+	public Product() {
+
 	}
-	
+
 	public Product(String id, String name, int price, int quantity) {
 		this.id = id;
 		this.name = name;
@@ -53,13 +55,17 @@ public class Product implements Comparable<Product> {
 		this.quantity = quantity;
 	}
 
+	public Bill getBill() {
+		return bill;
+	}
+
+	public void setBill(Bill bill) {
+		this.bill = bill;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("%-2s %-10s %-5d", id, name, price);
-	}
-
-	public int compareTo(Product o) {
-		return id.compareTo(o.getId());
 	}
 
 }

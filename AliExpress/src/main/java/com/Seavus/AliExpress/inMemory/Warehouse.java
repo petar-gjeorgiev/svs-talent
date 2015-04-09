@@ -1,4 +1,4 @@
-package com.Seavus.AliExpress;
+package com.Seavus.AliExpress.inMemory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,7 +51,7 @@ public class Warehouse implements ProductInterface {
 		try {
 			scanner = new Scanner(
 					new File(
-							"C:/Users/student/Documents/PG/git/svs-talent/AliExpress/src/main/java/com/Seavus/AliExpress/Products.txt")); // Absolute
+							"D:/Education/Seavus/git/svs-talent/AliExpress/src/main/java/com/Seavus/AliExpress/Products.txt")); // Absolute
 																														// path
 																														// to
 																														// Products.txt
