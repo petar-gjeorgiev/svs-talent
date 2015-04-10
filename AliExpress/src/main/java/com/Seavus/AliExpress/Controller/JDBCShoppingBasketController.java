@@ -26,7 +26,8 @@ public class JDBCShoppingBasketController {
 	public void addProductsToBasket() {
 		HashMap<String, Integer> map = output.addProductsToBasket(input,
 				productService);
-		ShoppingBasket basket = service.getNewestBasket();
+		service.addBasket();
+		ShoppingBasket basket = service.getNewestBasket(); 
 		for (Entry<String, Integer> entry : map.entrySet()) {
 			Product p = productService.getProductById(entry.getKey());
 			p.setQuantity(entry.getValue());

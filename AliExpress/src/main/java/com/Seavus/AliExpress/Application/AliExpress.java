@@ -19,7 +19,7 @@ public class AliExpress {
 
 		Warehouse.fillWarehouse(warehouse);
 		UI input = Factory.Input();
-
+		
 		AppInfo.mainMenuInfo();
 		JDBCProductController productController = Factory.productControllerInstance();
 		JDBCShoppingBasketController shoppingController = Factory.shoppingControllerInstance();
@@ -36,7 +36,7 @@ public class AliExpress {
 				AppInfo.mainMenuInfo();
 			}
 			if (line.equals("3")) {
-				
+				AppInfo.HibernateAppMenu();
 			}
 		}
 		

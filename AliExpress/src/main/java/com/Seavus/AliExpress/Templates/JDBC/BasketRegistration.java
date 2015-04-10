@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class BasketRegistration implements JDBCSetter {
 
 	public void execute(Connection connection) {
-		String sql = "insert into shoppingBasket (sum) values(?)";
+		String sql = "insert into shoppingbasket(sum) values(?)";
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement(sql);

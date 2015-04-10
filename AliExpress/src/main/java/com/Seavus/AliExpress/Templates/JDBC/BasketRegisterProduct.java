@@ -16,7 +16,7 @@ public class BasketRegisterProduct implements JDBCSetter {
 	}
 
 	public void execute(Connection connection) {
-		String sql = "insert into bill (productId,basketId) values(?,?)";
+		String sql = "insert into bill (productid,basketid) values(?,?)";
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement(sql);

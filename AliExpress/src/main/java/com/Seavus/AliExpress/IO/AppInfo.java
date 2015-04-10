@@ -6,6 +6,7 @@ import com.Seavus.AliExpress.Exceptions.EmptyShoppingBasketException;
 import com.Seavus.AliExpress.Exceptions.InvalidProductException;
 import com.Seavus.AliExpress.Exceptions.QuantityException;
 import com.Seavus.AliExpress.Factory.Factory;
+import com.Seavus.AliExpress.Factory.HibernateSessionFactory;
 import com.Seavus.AliExpress.Service.FillWarehouseService;
 import com.Seavus.AliExpress.inMemory.Product;
 import com.Seavus.AliExpress.inMemory.ShoppingBasket;
@@ -83,6 +84,10 @@ public class AppInfo {
 				shoppingController.addProductsToBasket();
 			}
 		}
+	}
+	
+	public static void HibernateAppMenu() {
+		HibernateSessionFactory.createSessionFactory();
 	}
 
 	public static void inMemoryAppMenu(UI ui, Warehouse warehouse,

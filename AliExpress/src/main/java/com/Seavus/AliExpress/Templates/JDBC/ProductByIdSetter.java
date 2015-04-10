@@ -1,9 +1,9 @@
 package com.Seavus.AliExpress.Templates.JDBC;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.Seavus.AliExpress.Model.Product;
 
@@ -18,28 +18,20 @@ public class ProductByIdSetter implements JDBCProductSetter {
 	public Product execute(Connection connection) {
 		Product p = new Product();
 		try {
-			String sql = "select * from product where id = ?";
-			PreparedStatement preparedStatement = connection
-					.prepareStatement(sql);
-			preparedStatement.setString(1, id);
-
-			ResultSet resultSet = preparedStatement.executeQuery(sql);
-
+			Statement statement = connection.createStatement();
+			String sql = "select * from product where id = '" + id + "'";
+			ResultSet resultSet = statement.executeQuery(sql);
 			if (resultSet.next()) {
-				String prodId = resultSet.getString("id");
+				String id = resultSet.getString("id");
 				String name = resultSet.getString("name");
-				int price = resultSet.getInt("price");
 				int quantity = resultSet.getInt("quantity");
-				p.setId(prodId);
-				p.setName(name);
-				p.setPrice(price);
-				p.setQuantity(quantity);
+				int price = resultSet.getInt("price");
+				p = new Product(id,name,price,quantity);
 			}
-			preparedStatement.close();
+			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return p;
 	}
 

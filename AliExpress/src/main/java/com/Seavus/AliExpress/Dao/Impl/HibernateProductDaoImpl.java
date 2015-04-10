@@ -15,22 +15,20 @@ public class HibernateProductDaoImpl implements ProductDao {
 	private SessionFactory sessionFactory;
 
 	public Product getProductById(String id) {
-
-		return null;
+		return template.getProductTransaction(sessionFactory, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Product> listAllProducts() {
-
-		return null;
+		return template.listAllProducts(sessionFactory).list();
 	}
 
 	public void addProduct(Product p) {
-
 		template.registerTransaction(sessionFactory, p);
 	}
 
 	public void removeProduct(String id) {
-
+		template.deleteProductTransaction(sessionFactory, id);
 	}
 
 	public void updateProduct(Product p) {

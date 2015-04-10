@@ -37,13 +37,13 @@ public class JDBCProductController {
 		String name = "NAME";
 		String price = "PRICE";
 		String id = "ID";
-		sb.append(String.format("%2s %10s %5s", id, name, price) + "\n");
+		sb.append(String.format("%-2s %-10s %-5s", id, name, price) + "\n");
 		for (Product p : service.listAllProducts()) {
 			sb.append(p + "\n");
 		}
 		System.out.println(sb.toString());
 		
-		System.out.println("\n\n");
+		System.out.println("\n");
 		AppInfo.appInfo();
 	}
 
