@@ -4,15 +4,15 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.Seavus.AliExpress.Model.Product;
 
 public class ProductListSetter implements JDBCListSetter {
 
-	public List<Product> execute(Connection connection) {
-		List<Product> products = new ArrayList<Product>();
+	public Set<Product> execute(Connection connection) {
+		Set<Product> products = new HashSet<Product>();
 		try {
 			Statement statement = connection.createStatement();
 			String sql = "select * from product";

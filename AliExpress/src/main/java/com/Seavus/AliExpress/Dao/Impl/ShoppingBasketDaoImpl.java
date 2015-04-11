@@ -1,6 +1,6 @@
 package com.Seavus.AliExpress.Dao.Impl;
 
-import java.util.List;
+import java.util.Set;
 
 import com.Seavus.AliExpress.Dao.ProductDao;
 import com.Seavus.AliExpress.Dao.ShoppingBasketDao;
@@ -11,6 +11,8 @@ import com.Seavus.AliExpress.Templates.JDBC.BasketRegisterProduct;
 import com.Seavus.AliExpress.Templates.JDBC.BasketRegistration;
 import com.Seavus.AliExpress.Templates.JDBC.JDBCDaoTemplate;
 import com.Seavus.AliExpress.Templates.JDBC.NewestBasketSetter;
+import com.Seavus.AliExpress.Templates.JDBC.ShoppingBasketUpdateSetter;
+import com.Seavus.AliExpress.Templates.JDBC.TotalBasketSetterImpl;
 
 public class ShoppingBasketDaoImpl implements ShoppingBasketDao {
 
@@ -18,12 +20,12 @@ public class ShoppingBasketDaoImpl implements ShoppingBasketDao {
 
 	public ProductDao productDao = new ProductDaoImpl();
 
-	public List<Product> listAllProducts(ShoppingBasket basket) {
+	public Set<Product> listAllProducts(ShoppingBasket basket) {
 		return template.executeList(new BasketProductList(basket.getId(),
-				productDao));
+				new ProductDaoImpl()));
 	}
-	public void addProduct(ShoppingBasket basket, Product p) {
-		template.execute(new BasketRegisterProduct(p.getId(), basket.getId()));
+	public void addProduct(ShoppingBasket basket, Product p,int quantity) {
+		template.execute(new BasketRegisterProduct(p.getId(), basket.getId(),quantity));
 	}
 
 	public void addBasket() {
@@ -33,5 +35,12 @@ public class ShoppingBasketDaoImpl implements ShoppingBasketDao {
 	public ShoppingBasket getNewestBasket() {
 		return template.executeNewestBasket(new NewestBasketSetter());
 	}
+	public void updateBasket(ShoppingBasket basket) {
+		template.execute(new ShoppingBasketUpdateSetter(basket));
+	}
+	public int getSum(ShoppingBasket basket) {
+		return template.getTotalSum(new TotalBasketSetterImpl(basket.getId()));
+	}
+
 
 }

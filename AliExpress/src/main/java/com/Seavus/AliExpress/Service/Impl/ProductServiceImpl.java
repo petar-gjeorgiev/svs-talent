@@ -1,6 +1,6 @@
 package com.Seavus.AliExpress.Service.Impl;
 
-import java.util.List;
+import java.util.Set;
 
 import com.Seavus.AliExpress.Dao.ProductDao;
 import com.Seavus.AliExpress.Dao.Impl.ProductDaoImpl;
@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 		productDao.updateProduct(p);
 	}
 
-	public List<Product> listAllProducts() {
+	public Set<Product> listAllProducts() {
 		return productDao.listAllProducts();
 	}
 

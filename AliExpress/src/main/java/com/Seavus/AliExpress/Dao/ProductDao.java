@@ -1,6 +1,6 @@
 package com.Seavus.AliExpress.Dao;
 
-import java.util.List;
+import java.util.Set;
 
 import com.Seavus.AliExpress.Model.Product;
 
@@ -9,7 +9,7 @@ public interface ProductDao {
 
 	public Product getProductById(String id);
 
-	public List<Product> listAllProducts();
+	public Set<Product> listAllProducts();
 
 	public void addProduct(Product p);
 

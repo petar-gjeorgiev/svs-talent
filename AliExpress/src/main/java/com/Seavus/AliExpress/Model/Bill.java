@@ -1,11 +1,9 @@
 package com.Seavus.AliExpress.Model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,20 +14,28 @@ public class Bill {
 	@GeneratedValue
 	private int id;
 
-	@OneToMany(mappedBy = "bill")
-	private List<Product> products;
+	@ManyToOne
+	private Product product;
 
-	@OneToMany(mappedBy = "bill")
-	private List<ShoppingBasket> basket;
+	@ManyToOne
+	private ShoppingBasket basket;
+
+	private int quantity;
 
 	public Bill() {
 
 	}
 
-	public Bill(int id, List<Product> products, List<ShoppingBasket> basket) {
+	public Bill(int id) {
 		this.id = id;
-		this.products = products;
-		this.basket = basket;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public int getId() {
@@ -40,19 +46,19 @@ public class Bill {
 		this.id = id;
 	}
 
-	public List<Product> getProducts() {
-		return products;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-	public List<ShoppingBasket> getBasket() {
+	public ShoppingBasket getBasket() {
 		return basket;
 	}
 
-	public void setBasket(List<ShoppingBasket> basket) {
+	public void setBasket(ShoppingBasket basket) {
 		this.basket = basket;
 	}
 

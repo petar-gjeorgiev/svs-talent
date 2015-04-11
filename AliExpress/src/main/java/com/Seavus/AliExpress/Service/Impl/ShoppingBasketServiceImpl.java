@@ -1,6 +1,6 @@
 package com.Seavus.AliExpress.Service.Impl;
 
-import java.util.List;
+import java.util.Set;
 
 import com.Seavus.AliExpress.Dao.ShoppingBasketDao;
 import com.Seavus.AliExpress.Dao.Impl.ShoppingBasketDaoImpl;
@@ -12,11 +12,11 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 
 	public ShoppingBasketDao shoppingDao = new ShoppingBasketDaoImpl();
 
-	public void addProduct(ShoppingBasket basket, Product p) {
-		shoppingDao.addProduct(basket, p);
+	public void addProduct(ShoppingBasket basket, Product p,int quantity) {
+		shoppingDao.addProduct(basket, p,quantity);
 	}
 
-	public List<Product> listAllProducts(ShoppingBasket basket) {
+	public Set<Product> listAllProducts(ShoppingBasket basket) {
 		return shoppingDao.listAllProducts(basket);
 	}
 
@@ -34,5 +34,13 @@ public class ShoppingBasketServiceImpl implements ShoppingBasketService {
 
 	public ShoppingBasket getNewestBasket() {
 		return shoppingDao.getNewestBasket();
+	}
+
+	public void updateBasket(ShoppingBasket basket) {
+		shoppingDao.updateBasket(basket);
+	}
+
+	public int getSum(ShoppingBasket basket) {
+		return shoppingDao.getSum(basket);
 	}
 }

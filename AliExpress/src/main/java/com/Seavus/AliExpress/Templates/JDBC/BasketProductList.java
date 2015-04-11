@@ -4,17 +4,18 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.Seavus.AliExpress.Dao.ProductDao;
+import com.Seavus.AliExpress.Dao.Impl.ProductDaoImpl;
 import com.Seavus.AliExpress.Exceptions.EmptyShoppingBasketException;
 import com.Seavus.AliExpress.Model.Product;
 
 public class BasketProductList implements JDBCListSetter {
 
 	private int id;
-
+	
 	private ProductDao productDao;
 	
 	public BasketProductList(int id,ProductDao productDao) {
@@ -22,22 +23,26 @@ public class BasketProductList implements JDBCListSetter {
 		productDao = this.productDao;
 	}
 
-	public List<Product> execute(Connection connection) {
-		List<Product> products = new ArrayList<Product>();
+	public Set<Product> execute(Connection connection) {
+		Set<Product> products = new HashSet<Product>();
+		Product p = new Product();
 		try {
 			Statement statement = connection.createStatement();
-			String sql = "select productId  from bill where id = " + id;
+			String sql = "select productid,quantity  from bill where basketid = " + id;
 			ResultSet resultSet = statement.executeQuery(sql);
 			while (resultSet.next()) {
-				String id = resultSet.getString("id");
-				Product p = productDao.getProductById(id);
+				productDao = new ProductDaoImpl();
+				String product_id = resultSet.getString("productid");
+				int quantity = resultSet.getInt("quantity");
+				p = productDao.getProductById(product_id);
+				p.setQuantity(quantity);
 				products.add(p);
 			}
 			if(products.size() == 0) {
 				try {
 					throw new EmptyShoppingBasketException("Empty basket");
 				} catch (EmptyShoppingBasketException e) {
-					e.printStackTrace();
+					System.err.println(e.getMessage());
 				}
 			}
 			statement.close();

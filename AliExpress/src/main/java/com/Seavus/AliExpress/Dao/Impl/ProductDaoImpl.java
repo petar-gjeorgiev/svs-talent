@@ -1,6 +1,6 @@
 package com.Seavus.AliExpress.Dao.Impl;
 
-import java.util.List;
+import java.util.Set;
 
 import com.Seavus.AliExpress.Dao.ProductDao;
 import com.Seavus.AliExpress.Model.Product;
@@ -19,7 +19,7 @@ public class ProductDaoImpl implements ProductDao {
 		return template.executeProduct(new ProductByIdSetter(id));
 	}
 
-	public List<Product> listAllProducts() {
+	public Set<Product> listAllProducts() {
 		return template.executeList(new ProductListSetter());
 	}
 

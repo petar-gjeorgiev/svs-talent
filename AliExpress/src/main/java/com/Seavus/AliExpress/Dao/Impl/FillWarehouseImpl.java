@@ -14,7 +14,7 @@ public class FillWarehouseImpl implements FillWarehouseDao {
 	public void fillWarehouse() {
 
 		File f = new File(
-				"C:/Users/student/Documents/PG/git/svs-talent/AliExpress/src/main/java/com/Seavus/AliExpress/inMemory/Products.txt");
+				"D:/Education/Seavus/git/svs-talent/AliExpress/src/main/java/com/Seavus/AliExpress/inMemory/Products.txt");
 
 		UI ui = new UI(f);
 		String line = "";

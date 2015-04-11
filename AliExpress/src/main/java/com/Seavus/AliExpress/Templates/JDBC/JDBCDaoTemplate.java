@@ -3,7 +3,7 @@ package com.Seavus.AliExpress.Templates.JDBC;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Set;
 
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Model.ShoppingBasket;
@@ -35,11 +35,15 @@ public class JDBCDaoTemplate {
 		return setter.execute(getConnection());
 	}
 
-	public List<Product> executeList(JDBCListSetter setter) {
+	public Set<Product> executeList(JDBCListSetter setter) {
 		return setter.execute(getConnection());
 	}
 	
 	public ShoppingBasket executeNewestBasket(JDBCBasketSetter setter) {
+		return setter.execute(getConnection());
+	}
+	
+	public int getTotalSum (TotalSumBasketSetter setter) {
 		return setter.execute(getConnection());
 	}
 	

@@ -1,19 +1,23 @@
 package com.Seavus.AliExpress.Model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "hibernate_basket")
 public class ShoppingBasket {
 
+	@Id
 	private int id;
 
 	private int sum;
 
-	@ManyToOne
-	private Bill bill;
+	@OneToMany(mappedBy = "basket")
+	private List<Bill> bills;
 
 	public ShoppingBasket() {
 
@@ -40,12 +44,12 @@ public class ShoppingBasket {
 		this.sum = sum;
 	}
 
-	public Bill getBill() {
-		return bill;
+	public List<Bill> getBills() {
+		return bills;
 	}
 
-	public void setBill(Bill bill) {
-		this.bill = bill;
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
 	}
 
 }

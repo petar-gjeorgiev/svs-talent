@@ -54,7 +54,7 @@ public class Output {
 			ProductService service) {
 		System.out.println("Add products to basket page\n\n");
 		System.out.println("Insert in format: productId-quantity\n");
-		System.out.println("end - to stop adding products\n");
+		System.out.println("end - to stop adding products and print the bill\n");
 
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		String line;

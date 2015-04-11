@@ -1,6 +1,6 @@
 package com.Seavus.AliExpress.Service;
 
-import java.util.List;
+import java.util.Set;
 
 import com.Seavus.AliExpress.Model.Product;
 
@@ -8,7 +8,7 @@ public interface ProductService {
 
 	public Product getProductById(String id);
 
-	public List<Product> listAllProducts();
+	public Set<Product> listAllProducts();
 
 	public void addProduct(Product p);
 

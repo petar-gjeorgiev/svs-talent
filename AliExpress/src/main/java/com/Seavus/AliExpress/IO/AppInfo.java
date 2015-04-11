@@ -1,5 +1,7 @@
 package com.Seavus.AliExpress.IO;
 
+import java.util.Set;
+
 import com.Seavus.AliExpress.Controller.JDBCProductController;
 import com.Seavus.AliExpress.Controller.JDBCShoppingBasketController;
 import com.Seavus.AliExpress.Exceptions.EmptyShoppingBasketException;
@@ -7,8 +9,8 @@ import com.Seavus.AliExpress.Exceptions.InvalidProductException;
 import com.Seavus.AliExpress.Exceptions.QuantityException;
 import com.Seavus.AliExpress.Factory.Factory;
 import com.Seavus.AliExpress.Factory.HibernateSessionFactory;
+import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Service.FillWarehouseService;
-import com.Seavus.AliExpress.inMemory.Product;
 import com.Seavus.AliExpress.inMemory.ShoppingBasket;
 import com.Seavus.AliExpress.inMemory.Warehouse;
 
@@ -45,47 +47,48 @@ public class AppInfo {
 		System.out.println("end - proceed with payment");
 	}
 
-	public static void mainMenu(UI input, Warehouse warehouse,
-			ShoppingBasket shoppingBasket) {
-		String line;
-		while (!(line = input.getInput().nextLine()).equals("end")) {
-			if (line.equals("1")) {
-				inMemoryAppMenu(Factory.Input(), warehouse, shoppingBasket);
-				mainMenuInfo();
-			}
-			if (line.equals("2")) {
-
-			}
-			if (line.equals("3")) {
-
-			}
+	public static void printProducts(Set<Product> products,int sum) {
+		StringBuilder sb = new StringBuilder();
+		String name = "NAME";
+		String price = "PRICE";
+		String id = "ID";
+		String quantity = "QUANTITY";
+		sb.append(String.format("%-2s %-10s %-5s %-4s", id, name, price,
+				quantity) + "\n");
+		for (Product p : products) {
+			sb.append(String.format("%s %-4s", p,p.getQuantity()) + "\n");
 		}
+		sb.append("\nTotal sum: " + sum);
+		System.out.println(sb.toString());
 	}
 
-	public static void JDBCAppMenu(UI ui, JDBCProductController controller,JDBCShoppingBasketController shoppingController,FillWarehouseService warehouseService) {
-		
-		//warehouseService.fillWarehouse();
+	public static void JDBCAppMenu(UI ui, JDBCProductController controller,
+			JDBCShoppingBasketController shoppingController,
+			FillWarehouseService warehouseService) {
+
+	//	 warehouseService.fillWarehouse();
 		appInfo();
 		String line;
 		while (!(line = ui.getInput().nextLine()).equals("end")) {
-			if(line.equals("1")) {
+			if (line.equals("1")) {
 				controller.registerProduct();
 			}
-			if(line.equals("2")) {
+			if (line.equals("2")) {
 				controller.updateProduct();
 			}
-			if(line.equals("3")) {
+			if (line.equals("3")) {
 				controller.listProducts();
 			}
-			if(line.equals("4")) {
+			if (line.equals("4")) {
 				controller.unregisterProduct();
 			}
-			if(line.equals("5")) {
+			if (line.equals("5")) {
 				shoppingController.addProductsToBasket();
+				printProducts(shoppingController.listAllProducts(),shoppingController.getSum());
 			}
 		}
 	}
-	
+
 	public static void HibernateAppMenu() {
 		HibernateSessionFactory.createSessionFactory();
 	}
@@ -125,7 +128,8 @@ public class AppInfo {
 				throw new InvalidProductException(
 						"There is no product with id " + id);
 			} else {
-				Product p = warehouse.getProductById(id);
+				com.Seavus.AliExpress.inMemory.Product p = warehouse
+						.getProductById(id);
 				if (p.getQuantity() < quantity) {
 					throw new QuantityException("There are only "
 							+ p.getQuantity() + " " + p.getName()

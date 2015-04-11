@@ -16,7 +16,7 @@ public class NewestBasketSetter implements JDBCBasketSetter {
 		ShoppingBasket basket = new ShoppingBasket();
 		try {
 			Statement statement = connection.createStatement();
-			String sql = "select * from shoppingBasket";
+			String sql = "select * from shoppingbasket";
 			ResultSet resultSet = statement.executeQuery(sql);
 
 			while (resultSet.next()) {

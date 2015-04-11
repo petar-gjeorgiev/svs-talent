@@ -1,6 +1,6 @@
 package com.Seavus.AliExpress.Dao.Impl;
 
-import java.util.List;
+import java.util.Set;
 
 import org.hibernate.SessionFactory;
 
@@ -19,8 +19,8 @@ public class HibernateProductDaoImpl implements ProductDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Product> listAllProducts() {
-		return template.listAllProducts(sessionFactory).list();
+	public Set<Product> listAllProducts() {
+		return (Set<Product>) template.listAllProducts(sessionFactory).list();
 	}
 
 	public void addProduct(Product p) {

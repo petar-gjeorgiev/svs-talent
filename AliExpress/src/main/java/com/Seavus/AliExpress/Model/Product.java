@@ -1,9 +1,11 @@
 package com.Seavus.AliExpress.Model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,8 +22,8 @@ public class Product {
 
 	private int quantity;
 
-	@ManyToOne
-	private Bill bill;
+	@OneToMany(mappedBy = "product")
+	private List<Bill> bills;
 
 	public Product() {
 
@@ -66,12 +68,12 @@ public class Product {
 		this.quantity = quantity;
 	}
 
-	public Bill getBill() {
-		return bill;
+	public List<Bill> getBills() {
+		return bills;
 	}
 
-	public void setBill(Bill bill) {
-		this.bill = bill;
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
 	}
 
 	@Override

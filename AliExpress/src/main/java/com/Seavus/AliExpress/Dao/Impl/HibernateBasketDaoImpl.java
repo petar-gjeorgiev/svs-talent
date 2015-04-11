@@ -1,6 +1,6 @@
 package com.Seavus.AliExpress.Dao.Impl;
 
-import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -19,11 +19,7 @@ public class HibernateBasketDaoImpl implements ShoppingBasketDao {
 
 	private SessionFactory sessionFactory;
 	
-	public void addProduct(ShoppingBasket basket, Product p) {
-		
-	}
-
-	public List<Product> listAllProducts(ShoppingBasket basket) {
+	public Set<Product> listAllProducts(ShoppingBasket basket) {
 		int id = basket.getId();
 		Session session = sessionFactory.openSession();
 		Criteria c = session.createCriteria(Bill.class);
@@ -39,6 +35,21 @@ public class HibernateBasketDaoImpl implements ShoppingBasketDao {
 
 	public ShoppingBasket getNewestBasket() {
 		return null;
+	}
+
+	public void updateBasket(ShoppingBasket basket) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addProduct(ShoppingBasket basket, Product p, int quantity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public int getSum(ShoppingBasket basket) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

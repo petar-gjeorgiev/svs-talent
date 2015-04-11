@@ -2,6 +2,7 @@ package com.Seavus.AliExpress.Controller;
 
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.Seavus.AliExpress.Factory.Factory;
 import com.Seavus.AliExpress.IO.Output;
@@ -22,25 +23,39 @@ public class JDBCShoppingBasketController {
 	public Output output = new Output();
 
 	public ProductService productService = new ProductServiceImpl();
-
+	
 	public void addProductsToBasket() {
 		HashMap<String, Integer> map = output.addProductsToBasket(input,
 				productService);
 		service.addBasket();
 		ShoppingBasket basket = service.getNewestBasket(); 
+		int sum = 0;
 		for (Entry<String, Integer> entry : map.entrySet()) {
 			Product p = productService.getProductById(entry.getKey());
-			p.setQuantity(entry.getValue());
-			service.addProduct(basket, p);
+			sum += entry.getValue()*p.getPrice();
+			p.setQuantity(p.getQuantity() - entry.getValue());
+			service.addProduct(basket, p,entry.getValue());
+			if(p.getQuantity() == 0) {
+				productService.removeProduct(p.getId());
+			}
+			else {
+				productService.updateProduct(p);
+			}
 		}
+		basket.setSum(sum);
+		service.updateBasket(basket);
 	}
 
 	public void addShoppingBasket() {
 		service.addBasket();
 	}
 
-	public void listAllProducts() {
-		service.listAllProducts(service.getNewestBasket());
+	public Set<Product> listAllProducts() {
+		return service.listAllProducts(service.getNewestBasket());
+	}
+	
+	public int getSum() {
+		return service.getSum(service.getNewestBasket());
 	}
 
 }
