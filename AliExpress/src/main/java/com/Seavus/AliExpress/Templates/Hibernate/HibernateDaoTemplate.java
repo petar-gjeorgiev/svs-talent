@@ -1,11 +1,18 @@
 package com.Seavus.AliExpress.Templates.Hibernate;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
+import com.Seavus.AliExpress.Model.Bill;
 import com.Seavus.AliExpress.Model.Product;
+import com.Seavus.AliExpress.Model.ShoppingBasket;
 
 public class HibernateDaoTemplate {
 
@@ -42,14 +49,37 @@ public class HibernateDaoTemplate {
 	};
 
 	public void commit() {
-		tx.commit();
+		try {
+			if(!tx.wasCommitted())
+				tx.commit();
+		}
+		catch (Exception e) {
+			tx.rollback();
+		}
 	}
 
 	public void transaction(SessionFactory factory) {
-		session = factory.openSession();
-		tx = session.beginTransaction();
+		
+	//	session = factory.openSession(); // with one update
+		if (session == null) {
+			
+			try {
+				session = factory.openSession();
+				tx = session.beginTransaction();
+			}
+			catch (Exception e) {
+				tx.rollback();
+			}
+			
+		}
+		else {
+			session.close();
+			session = factory.openSession();
+			tx = session.beginTransaction();
+		}
+		
 	}
-
+	
 	public void registerTransaction(SessionFactory factory, Object o) {
 		transaction(factory);
 		saveSetter.setSession(session, o);
@@ -75,13 +105,16 @@ public class HibernateDaoTemplate {
 	}
 
 	public Product getProductTransaction(SessionFactory factory, String id) {
-		Product p;
+		Product p = new Product();
+//		if(tx == null) {
+//			transaction(factory);
+//		}
 		transaction(factory);
 		p = getProductSetter.setSession(session, id);
 		commit();
 		return p;
 	}
-	
+
 	public Criteria listAllProducts(SessionFactory factory) {
 		transaction(factory);
 		Criteria c = session.createCriteria(Product.class);
@@ -89,5 +122,39 @@ public class HibernateDaoTemplate {
 		return c;
 	}
 
-	
+	public Criteria listAllShoppingBaskets(SessionFactory factory) {
+		transaction(factory);
+		Criteria c = session.createCriteria(ShoppingBasket.class);
+		commit();
+		return c;
+	}
+
+	public Criteria getTotalSum(SessionFactory factory, int id) {
+		transaction(factory);
+		Criteria c = session.createCriteria(ShoppingBasket.class);
+		c.add(Restrictions.eq("id", id));
+		commit();
+		return c;
+	}
+
+	public Set<Product> listProducts(SessionFactory factory, int id) {
+		transaction(factory);
+		Criteria c = session.createCriteria(Bill.class);
+		c.add(Restrictions.eq("basket.id", id));
+
+		@SuppressWarnings("unchecked")
+		List<Bill> bills = c.list();
+		Set<Product> res = new HashSet<Product>();
+		Product p = new Product();
+		for (int i = 0; i < bills.size(); i++) {
+			String productid = bills.get(i).getProduct().getId();
+			int quantity = bills.get(i).getQuantity();
+			p = getProductTransaction(factory, productid);
+			p.setQuantity(quantity);
+			res.add(p);
+		}
+		commit();
+		return res;
+	}
+
 }

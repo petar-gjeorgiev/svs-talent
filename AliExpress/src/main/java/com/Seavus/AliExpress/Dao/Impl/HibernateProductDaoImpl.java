@@ -1,14 +1,16 @@
 package com.Seavus.AliExpress.Dao.Impl;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.SessionFactory;
 
-import com.Seavus.AliExpress.Dao.ProductDao;
+import com.Seavus.AliExpress.Dao.HibernateProductDao;
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Templates.Hibernate.HibernateDaoTemplate;
 
-public class HibernateProductDaoImpl implements ProductDao {
+public class HibernateProductDaoImpl implements HibernateProductDao {
 
 	private HibernateDaoTemplate template = new HibernateDaoTemplate();
 
@@ -20,7 +22,12 @@ public class HibernateProductDaoImpl implements ProductDao {
 
 	@SuppressWarnings("unchecked")
 	public Set<Product> listAllProducts() {
-		return (Set<Product>) template.listAllProducts(sessionFactory).list();
+		List<Product> products = template.listAllProducts(sessionFactory).list();
+		Set<Product> res = new HashSet<Product>();
+		for(int i=0;i<products.size();i++) {
+			res.add(products.get(i));
+		}
+		return res;
 	}
 
 	public void addProduct(Product p) {
@@ -33,6 +40,16 @@ public class HibernateProductDaoImpl implements ProductDao {
 
 	public void updateProduct(Product p) {
 		template.updateTransaction(sessionFactory, p);
+	}
+
+	public void setFactory(SessionFactory factory) {
+		if(sessionFactory == null) {
+			sessionFactory = factory;
+		}
+	}
+
+	public void closeFactory() {
+		template.closeFactory(sessionFactory);
 	}
 
 }

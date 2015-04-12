@@ -2,13 +2,15 @@ package com.Seavus.AliExpress.IO;
 
 import java.util.Set;
 
-import com.Seavus.AliExpress.Controller.JDBCProductController;
-import com.Seavus.AliExpress.Controller.JDBCShoppingBasketController;
+import com.Seavus.AliExpress.Controller.HibernateProductController;
+import com.Seavus.AliExpress.Controller.HibernateShoppingBasketController;
+import com.Seavus.AliExpress.Controller.ProductController;
+import com.Seavus.AliExpress.Controller.ShoppingBasketController;
 import com.Seavus.AliExpress.Exceptions.EmptyShoppingBasketException;
+import com.Seavus.AliExpress.Exceptions.InvalidInputException;
 import com.Seavus.AliExpress.Exceptions.InvalidProductException;
 import com.Seavus.AliExpress.Exceptions.QuantityException;
 import com.Seavus.AliExpress.Factory.Factory;
-import com.Seavus.AliExpress.Factory.HibernateSessionFactory;
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Service.FillWarehouseService;
 import com.Seavus.AliExpress.inMemory.ShoppingBasket;
@@ -62,8 +64,8 @@ public class AppInfo {
 		System.out.println(sb.toString());
 	}
 
-	public static void JDBCAppMenu(UI ui, JDBCProductController controller,
-			JDBCShoppingBasketController shoppingController,
+	public static void JDBCAppMenu(UI ui, ProductController controller,
+			ShoppingBasketController shoppingController,
 			FillWarehouseService warehouseService) {
 
 	//	 warehouseService.fillWarehouse();
@@ -89,8 +91,38 @@ public class AppInfo {
 		}
 	}
 
-	public static void HibernateAppMenu() {
-		HibernateSessionFactory.createSessionFactory();
+	public static void HibernateAppMenu(UI ui,HibernateProductController hibernateProductController,HibernateShoppingBasketController hibernateShoppingBasketController) {
+		/**
+		 * To fill the Product table .. Execute this line when you run the app for the first time only..
+		 */
+		//hibernateProductController.fillWarehouse(); 
+		appInfo();
+		String line;
+		while (!(line = ui.getInput().nextLine()).equals("end")) {
+			if (line.equals("1")) {
+				hibernateProductController.registerProduct();
+			}
+			else if (line.equals("2")) {
+				hibernateProductController.updateProduct();
+			}
+			else if (line.equals("3")) {
+				hibernateProductController.listProducts();
+			}
+			else if (line.equals("4")) {
+				hibernateProductController.unregisterProduct();
+			}
+			else if (line.equals("5")) {
+				hibernateShoppingBasketController.addProductsToBasket();
+				printProducts(hibernateShoppingBasketController.listAllProducts(),hibernateShoppingBasketController.getSum());
+			}
+			else {
+				try {
+					throw new InvalidInputException("Invalid input! Try again");
+				} catch (InvalidInputException e) {
+					System.err.println(e.getMessage());;
+				}
+			}
+		}
 	}
 
 	public static void inMemoryAppMenu(UI ui, Warehouse warehouse,

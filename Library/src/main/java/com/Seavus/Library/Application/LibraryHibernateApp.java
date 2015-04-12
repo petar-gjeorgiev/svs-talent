@@ -52,7 +52,6 @@ public class LibraryHibernateApp {
 							
 							if(line.equals("3")) {
 								controller.updateBook();
-								
 							}
 							
 							if(line.equals("4")) {

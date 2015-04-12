@@ -1,24 +1,29 @@
 package com.Seavus.AliExpress.Controller;
 
-import com.Seavus.AliExpress.Factory.Factory;
 import com.Seavus.AliExpress.IO.AppInfo;
 import com.Seavus.AliExpress.IO.Output;
 import com.Seavus.AliExpress.IO.UI;
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Service.FillWarehouseService;
 import com.Seavus.AliExpress.Service.ProductService;
-import com.Seavus.AliExpress.Service.Impl.FillWarehouseServiceImpl;
-import com.Seavus.AliExpress.Service.Impl.ProductServiceImpl;
 
-public class JDBCProductController {
+public class ProductController {
 
-	public ProductService service = new ProductServiceImpl();
+	public ProductService service;
 
-	public FillWarehouseService warehouseService = new FillWarehouseServiceImpl();
+	public FillWarehouseService warehouseService;
 
-	public Output output = new Output();
+	public Output output;
 
-	public UI input = Factory.Input();
+	public UI input;
+
+	public ProductController(ProductService service,
+			FillWarehouseService warehouseService, Output output, UI input) {
+		this.service = service;
+		this.warehouseService = warehouseService;
+		this.output = output;
+		this.input = input;
+	}
 
 	public void registerProduct() {
 		service.addProduct(output.registerProduct(input));
@@ -42,7 +47,7 @@ public class JDBCProductController {
 			sb.append(p + "\n");
 		}
 		System.out.println(sb.toString());
-		
+
 		System.out.println("\n");
 		AppInfo.appInfo();
 	}
