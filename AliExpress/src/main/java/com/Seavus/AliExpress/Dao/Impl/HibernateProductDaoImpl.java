@@ -4,7 +4,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Resource;
+
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.Seavus.AliExpress.Dao.HibernateProductDao;
@@ -14,10 +17,13 @@ import com.Seavus.AliExpress.Templates.Hibernate.HibernateDaoTemplate;
 @Repository
 public class HibernateProductDaoImpl implements HibernateProductDao {
 
+	@Autowired
 	private HibernateDaoTemplate template;
 
+	@Resource
 	private SessionFactory sessionFactory;
-
+	
+	
 	public HibernateProductDaoImpl(HibernateDaoTemplate template) {
 		this.template = template;
 	}

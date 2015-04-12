@@ -1,5 +1,7 @@
 package com.Seavus.AliExpress.Dao.Impl;
 
+import javax.annotation.Resource;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,17 +15,22 @@ import com.Seavus.AliExpress.Templates.Hibernate.HibernateDaoTemplate;
 @Repository
 public class HibernateFillWarehouseImpl implements HibernateFillWarehouseDao {
 
+	@Autowired
 	private HibernateProductDao productDao;
 
+	@Autowired
 	private HibernateDaoTemplate template;
 
+	@Resource
 	private SessionFactory sessionFactory;
 
+	@Autowired
 	private Product product;
 
+	@Autowired
 	private UI input;
 
-	@Autowired
+	
 	public HibernateFillWarehouseImpl(HibernateProductDao productDao,
 			HibernateDaoTemplate template, Product p, UI ui) {
 		this.productDao = productDao;

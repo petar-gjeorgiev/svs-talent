@@ -2,6 +2,8 @@ package com.Seavus.AliExpress.Service.Impl;
 
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +14,13 @@ import com.Seavus.AliExpress.Model.ShoppingBasket;
 import com.Seavus.AliExpress.Service.HibernateShoppingBasketService;
 
 @Service
+@Transactional
 public class HibernateShoppingBasketServiceImpl implements
 		HibernateShoppingBasketService {
 
-	public HibernateShoppingBasketDao shoppingDao;
-
 	@Autowired
+	public HibernateShoppingBasketDao shoppingDao;
+	
 	public HibernateShoppingBasketServiceImpl(HibernateShoppingBasketDao shoppingDao) {
 		this.shoppingDao = shoppingDao;
 	}

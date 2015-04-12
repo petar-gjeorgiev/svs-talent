@@ -35,6 +35,7 @@ import com.Seavus.AliExpress.inMemory.Warehouse;
 public class AliExpress {
 
 	public static void main(String[] args) {
+		
 		Warehouse warehouse = Factory.getWarehouseInstance();
 		ShoppingBasket shoppingBasket = Factory.getBasketInstance();
 
