@@ -1,6 +1,7 @@
 package com.Seavus.AliExpress.Controller;
 
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Component;
 
 import com.Seavus.AliExpress.IO.AppInfo;
 import com.Seavus.AliExpress.IO.Output;
@@ -9,22 +10,27 @@ import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Service.HibernateProductService;
 import com.Seavus.AliExpress.Service.HibernateWarehouseService;
 
+@Component
 public class HibernateProductController {
 
-	public HibernateProductService service;
+	private HibernateProductService service;
 
-	public HibernateWarehouseService warehouseService;
+	private HibernateWarehouseService warehouseService;
 
-	public Output output;
+	private Output output;
 
-	public UI input;
+	private UI input;
+
+	private AppInfo info;
 
 	public HibernateProductController(HibernateProductService service,
-			HibernateWarehouseService warehouseService, Output output, UI input) {
+			HibernateWarehouseService warehouseService, Output output,
+			UI input, AppInfo info) {
 		this.service = service;
 		this.warehouseService = warehouseService;
 		this.output = output;
 		this.input = input;
+		this.info = info;
 	}
 
 	public void registerProduct() {
@@ -51,7 +57,7 @@ public class HibernateProductController {
 		System.out.println(sb.toString());
 
 		System.out.println("\n");
-		AppInfo.appInfo();
+		info.appInfo();
 	}
 
 	public void fillWarehouse() {

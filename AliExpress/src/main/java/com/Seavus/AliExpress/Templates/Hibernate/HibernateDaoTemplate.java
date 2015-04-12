@@ -1,6 +1,5 @@
 package com.Seavus.AliExpress.Templates.Hibernate;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -9,15 +8,27 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.Seavus.AliExpress.Model.Bill;
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Model.ShoppingBasket;
 
+@Component
 public class HibernateDaoTemplate {
 
 	private Transaction tx;
 	private Session session;
+
+	private Product product;
+	private Set<Product> products;
+
+	@Autowired
+	public HibernateDaoTemplate(Product product, Set<Product> products) {
+		this.product = product;
+		this.products = products;
+	}
 
 	private HibernateSessionSetter saveSetter = new HibernateSessionSetter() {
 
@@ -50,36 +61,31 @@ public class HibernateDaoTemplate {
 
 	public void commit() {
 		try {
-			if(!tx.wasCommitted())
+			if (!tx.wasCommitted())
 				tx.commit();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			tx.rollback();
 		}
 	}
 
 	public void transaction(SessionFactory factory) {
-		
-	//	session = factory.openSession(); // with one update
 		if (session == null) {
-			
+
 			try {
 				session = factory.openSession();
 				tx = session.beginTransaction();
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				tx.rollback();
 			}
-			
-		}
-		else {
+
+		} else {
 			session.close();
 			session = factory.openSession();
 			tx = session.beginTransaction();
 		}
-		
+
 	}
-	
+
 	public void registerTransaction(SessionFactory factory, Object o) {
 		transaction(factory);
 		saveSetter.setSession(session, o);
@@ -106,9 +112,6 @@ public class HibernateDaoTemplate {
 
 	public Product getProductTransaction(SessionFactory factory, String id) {
 		Product p = new Product();
-//		if(tx == null) {
-//			transaction(factory);
-//		}
 		transaction(factory);
 		p = getProductSetter.setSession(session, id);
 		commit();
@@ -144,8 +147,8 @@ public class HibernateDaoTemplate {
 
 		@SuppressWarnings("unchecked")
 		List<Bill> bills = c.list();
-		Set<Product> res = new HashSet<Product>();
-		Product p = new Product();
+		Set<Product> res = products;
+		Product p = product;
 		for (int i = 0; i < bills.size(); i++) {
 			String productid = bills.get(i).getProduct().getId();
 			int quantity = bills.get(i).getQuantity();

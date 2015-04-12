@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Component;
 
 import com.Seavus.AliExpress.IO.Output;
 import com.Seavus.AliExpress.IO.UI;
@@ -13,6 +14,7 @@ import com.Seavus.AliExpress.Model.ShoppingBasket;
 import com.Seavus.AliExpress.Service.HibernateProductService;
 import com.Seavus.AliExpress.Service.HibernateShoppingBasketService;
 
+@Component
 public class HibernateShoppingBasketController {
 
 	public HibernateShoppingBasketService service;

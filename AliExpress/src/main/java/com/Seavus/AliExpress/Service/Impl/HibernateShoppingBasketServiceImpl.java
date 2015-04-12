@@ -3,18 +3,25 @@ package com.Seavus.AliExpress.Service.Impl;
 import java.util.Set;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.Seavus.AliExpress.Dao.HibernateShoppingBasketDao;
-import com.Seavus.AliExpress.Dao.Impl.HibernateBasketDaoImpl;
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Model.ShoppingBasket;
 import com.Seavus.AliExpress.Service.HibernateShoppingBasketService;
 
+@Service
 public class HibernateShoppingBasketServiceImpl implements
 		HibernateShoppingBasketService {
 
-	public HibernateShoppingBasketDao shoppingDao = new HibernateBasketDaoImpl();
+	public HibernateShoppingBasketDao shoppingDao;
 
+	@Autowired
+	public HibernateShoppingBasketServiceImpl(HibernateShoppingBasketDao shoppingDao) {
+		this.shoppingDao = shoppingDao;
+	}
+	
 	public void addProduct(ShoppingBasket basket, Product p, int quantity) {
 		shoppingDao.addProduct(basket, p, quantity);
 	}

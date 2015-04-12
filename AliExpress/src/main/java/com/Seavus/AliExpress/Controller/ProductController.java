@@ -9,20 +9,24 @@ import com.Seavus.AliExpress.Service.ProductService;
 
 public class ProductController {
 
-	public ProductService service;
+	private ProductService service;
 
-	public FillWarehouseService warehouseService;
+	private FillWarehouseService warehouseService;
 
-	public Output output;
+	private Output output;
 
-	public UI input;
+	private UI input;
+
+	private AppInfo info;
 
 	public ProductController(ProductService service,
-			FillWarehouseService warehouseService, Output output, UI input) {
+			FillWarehouseService warehouseService, Output output, UI input,
+			AppInfo info) {
 		this.service = service;
 		this.warehouseService = warehouseService;
 		this.output = output;
 		this.input = input;
+		this.info = info;
 	}
 
 	public void registerProduct() {
@@ -49,7 +53,7 @@ public class ProductController {
 		System.out.println(sb.toString());
 
 		System.out.println("\n");
-		AppInfo.appInfo();
+		info.appInfo();
 	}
 
 	public void fillWarehouse() {

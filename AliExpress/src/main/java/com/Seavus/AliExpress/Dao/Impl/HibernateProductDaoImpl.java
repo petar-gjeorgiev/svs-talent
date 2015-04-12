@@ -5,17 +5,23 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import com.Seavus.AliExpress.Dao.HibernateProductDao;
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Templates.Hibernate.HibernateDaoTemplate;
 
+@Repository
 public class HibernateProductDaoImpl implements HibernateProductDao {
 
-	private HibernateDaoTemplate template = new HibernateDaoTemplate();
+	private HibernateDaoTemplate template;
 
 	private SessionFactory sessionFactory;
 
+	public HibernateProductDaoImpl(HibernateDaoTemplate template) {
+		this.template = template;
+	}
+	
 	public Product getProductById(String id) {
 		return template.getProductTransaction(sessionFactory, id);
 	}

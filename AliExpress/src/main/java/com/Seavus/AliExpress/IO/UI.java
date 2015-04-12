@@ -1,26 +1,20 @@
 package com.Seavus.AliExpress.IO;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class UI {
 
 	private Scanner input;
 
-	public UI() {
-		input = new Scanner(System.in);
+	@Autowired
+	public UI(Scanner scanner) {
+		input = scanner;
 	}
 
-	public UI(File file) {
-		try {
-			input = new Scanner(file);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 	public Scanner getInput() {
 		return input;
 	}

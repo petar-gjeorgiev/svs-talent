@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import com.Seavus.AliExpress.Dao.HibernateShoppingBasketDao;
 import com.Seavus.AliExpress.Model.Bill;
@@ -11,11 +12,16 @@ import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Model.ShoppingBasket;
 import com.Seavus.AliExpress.Templates.Hibernate.HibernateDaoTemplate;
 
+@Repository
 public class HibernateBasketDaoImpl implements HibernateShoppingBasketDao {
 
-	private HibernateDaoTemplate template = new HibernateDaoTemplate();
+	private HibernateDaoTemplate template;
 
 	private SessionFactory sessionFactory;
+	
+	public HibernateBasketDaoImpl(HibernateDaoTemplate template) {
+		this.template = template;
+	}
 
 	public Set<Product> listAllProducts(ShoppingBasket basket) {
 		return template.listProducts(sessionFactory, basket.getId());
