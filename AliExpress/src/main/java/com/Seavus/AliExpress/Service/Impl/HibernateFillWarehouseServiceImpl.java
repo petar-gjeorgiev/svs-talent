@@ -17,6 +17,9 @@ public class HibernateFillWarehouseServiceImpl implements
 	@Autowired
 	public HibernateFillWarehouseDao hibernateDao;
 
+	public HibernateFillWarehouseServiceImpl() {
+		
+	}
 	
 	public HibernateFillWarehouseServiceImpl(HibernateFillWarehouseDao dao) {
 		hibernateDao = dao;

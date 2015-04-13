@@ -8,8 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class UI {
 
+	
 	private Scanner input;
 
+	public UI() {
+		
+	}
+	
 	@Autowired
 	public UI(Scanner scanner) {
 		input = scanner;

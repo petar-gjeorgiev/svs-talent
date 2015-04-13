@@ -19,6 +19,9 @@ public class HibernateProductServiceImpl implements HibernateProductService {
 	@Autowired
 	public HibernateProductDao productDao;
 
+	public HibernateProductServiceImpl() {
+		
+	}
 	
 	public HibernateProductServiceImpl(HibernateProductDao productDao) {
 		this.productDao = productDao;

@@ -1,6 +1,8 @@
 package com.Seavus.AliExpress.Controller;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.Seavus.AliExpress.IO.AppInfo;
 import com.Seavus.AliExpress.IO.Output;
@@ -8,6 +10,7 @@ import com.Seavus.AliExpress.IO.UI;
 import com.Seavus.AliExpress.Model.CreditCart;
 import com.Seavus.AliExpress.Service.HibernateCreditCartService;
 
+@Component
 public class HibernateCartController {
 
 	private HibernateCreditCartService service;
@@ -18,6 +21,11 @@ public class HibernateCartController {
 	
 	private AppInfo info;
 
+	public HibernateCartController() {
+		
+	}
+	
+	@Autowired
 	public HibernateCartController(HibernateCreditCartService service,
 			Output output, UI input, AppInfo info) {
 		this.service = service;

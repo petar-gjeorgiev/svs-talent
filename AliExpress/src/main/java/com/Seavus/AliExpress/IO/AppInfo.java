@@ -29,8 +29,9 @@ public class AppInfo {
 
 	private UI input;
 
+	@Autowired
 	private Account account;
-	
+
 	@Autowired
 	public AppInfo(UI input) {
 		this.input = input;

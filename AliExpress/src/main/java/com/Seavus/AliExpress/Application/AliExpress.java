@@ -154,8 +154,7 @@ public class AliExpress {
 				hibernateAccountController.setFactory(factory);
 				hibernateCartController.setFactory(factory);
 				
-//				info.HibernateAppMenu(input, hibernateProductController,
-//						hibernateShoppingBasketController);
+
 				info.springHibernateMenu(input, hibernateProductController, hibernateShoppingBasketController, hibernateCartController, hibernateAccountController);
 				HibernateSessionFactory.closeFactory();
 			}

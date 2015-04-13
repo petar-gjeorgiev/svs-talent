@@ -17,13 +17,17 @@ import com.Seavus.AliExpress.Templates.Hibernate.HibernateDaoTemplate;
 @Repository
 public class HibernateProductDaoImpl implements HibernateProductDao {
 
-	@Autowired
+	
 	private HibernateDaoTemplate template;
 
 	@Resource
 	private SessionFactory sessionFactory;
 	
+	public HibernateProductDaoImpl() {
+		
+	}
 	
+	@Autowired
 	public HibernateProductDaoImpl(HibernateDaoTemplate template) {
 		this.template = template;
 	}

@@ -2,16 +2,27 @@ package com.Seavus.AliExpress.Service.Impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.Seavus.AliExpress.Dao.HibernateAccountDao;
 import com.Seavus.AliExpress.Model.Account;
 import com.Seavus.AliExpress.Service.HibernateAccountService;
 
+@Service
+@Transactional
 public class HibernateAccountServiceImpl implements HibernateAccountService {
 
 	private HibernateAccountDao dao;
 
+	public HibernateAccountServiceImpl() {
+		
+	}
+	
+	@Autowired
 	public HibernateAccountServiceImpl(HibernateAccountDao dao) {
 		this.dao = dao;
 	}

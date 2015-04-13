@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.Seavus.AliExpress.IO.Output;
@@ -25,6 +26,11 @@ public class HibernateShoppingBasketController {
 
 	public HibernateProductService productService;
 
+	public HibernateShoppingBasketController() {
+	
+	}
+	
+	@Autowired
 	public HibernateShoppingBasketController(
 			HibernateShoppingBasketService service,
 			HibernateProductService productService, UI input, Output output) {

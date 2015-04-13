@@ -1,6 +1,7 @@
 package com.Seavus.AliExpress.Controller;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.Seavus.AliExpress.IO.AppInfo;
@@ -21,8 +22,14 @@ public class HibernateProductController {
 
 	private UI input;
 
+	@SuppressWarnings("unused")
 	private AppInfo info;
 
+	public HibernateProductController() {
+		
+	}
+	
+	@Autowired
 	public HibernateProductController(HibernateProductService service,
 			HibernateWarehouseService warehouseService, Output output,
 			UI input, AppInfo info) {
@@ -57,7 +64,6 @@ public class HibernateProductController {
 		System.out.println(sb.toString());
 
 		System.out.println("\n");
-		info.appInfo();
 	}
 
 	public void fillWarehouse() {

@@ -3,8 +3,6 @@ package com.Seavus.AliExpress.Dao.Impl;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Resource;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,9 +19,12 @@ public class HibernateBasketDaoImpl implements HibernateShoppingBasketDao {
 	@Autowired
 	private HibernateDaoTemplate template;
 
-	@Resource
+	@Autowired
 	private SessionFactory sessionFactory;
 	
+	public HibernateBasketDaoImpl() {
+		
+	}
 	
 	public HibernateBasketDaoImpl(HibernateDaoTemplate template) {
 		this.template = template;

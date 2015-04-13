@@ -27,6 +27,10 @@ public class Output {
 
 	private AppInfo info;
 
+	public Output() {
+		
+	}
+	
 	@Autowired
 	public Output(Product p, HashMap<String, Integer> map, AppInfo info,CreditCart cart,Account account) {
 		this.p = p;

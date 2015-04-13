@@ -4,6 +4,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.Seavus.AliExpress.Model.Account;
 import com.Seavus.AliExpress.Model.Bill;
@@ -11,8 +13,10 @@ import com.Seavus.AliExpress.Model.CreditCart;
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Model.ShoppingBasket;
 
+@Component
 public class HibernateSessionFactory {
 
+	@Autowired
 	private static SessionFactory sessionFactory;
 
 	public static void createSessionFactory() {

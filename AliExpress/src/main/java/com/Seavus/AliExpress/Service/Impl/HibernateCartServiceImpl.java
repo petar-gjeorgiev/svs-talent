@@ -11,6 +11,10 @@ import com.Seavus.AliExpress.Service.HibernateCreditCartService;
 public class HibernateCartServiceImpl implements HibernateCreditCartService {
 
 	private HibernateCreditCartDao dao;
+	
+	public HibernateCartServiceImpl() {
+		
+	}
 
 	public HibernateCartServiceImpl(HibernateCreditCartDao dao) {
 		this.dao = dao;

@@ -3,6 +3,8 @@ package com.Seavus.AliExpress.Controller;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.Seavus.AliExpress.IO.AppInfo;
 import com.Seavus.AliExpress.IO.Output;
@@ -11,6 +13,7 @@ import com.Seavus.AliExpress.Model.Account;
 import com.Seavus.AliExpress.Service.HibernateAccountService;
 import com.Seavus.AliExpress.Service.HibernateCreditCartService;
 
+@Component
 public class HibernateAccountController {
 
 	private HibernateAccountService service;
@@ -24,6 +27,11 @@ public class HibernateAccountController {
 	@SuppressWarnings("unused") // may be used in the future ...
 	private AppInfo info;
 
+	public HibernateAccountController() {
+		
+	}
+	
+	@Autowired
 	public HibernateAccountController(HibernateAccountService service,
 			Output output, UI input, AppInfo info,
 			HibernateCreditCartService cartService) {
