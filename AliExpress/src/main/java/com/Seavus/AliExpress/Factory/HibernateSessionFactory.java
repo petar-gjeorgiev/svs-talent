@@ -5,7 +5,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import com.Seavus.AliExpress.Model.Account;
 import com.Seavus.AliExpress.Model.Bill;
+import com.Seavus.AliExpress.Model.CreditCart;
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Model.ShoppingBasket;
 
@@ -23,6 +25,8 @@ public class HibernateSessionFactory {
 					.addAnnotatedClass(Product.class)
 					.addAnnotatedClass(Bill.class)
 					.addAnnotatedClass(ShoppingBasket.class)
+					.addAnnotatedClass(CreditCart.class)
+					.addAnnotatedClass(Account.class)
 					.buildSessionFactory(serviceRegistry);
 			sessionFactory = SessionFactory;
 		}

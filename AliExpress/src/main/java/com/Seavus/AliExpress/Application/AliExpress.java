@@ -8,10 +8,14 @@ import java.util.Set;
 import org.hibernate.SessionFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
+import com.Seavus.AliExpress.Controller.HibernateAccountController;
+import com.Seavus.AliExpress.Controller.HibernateCartController;
 import com.Seavus.AliExpress.Controller.HibernateProductController;
 import com.Seavus.AliExpress.Controller.HibernateShoppingBasketController;
 import com.Seavus.AliExpress.Controller.ProductController;
 import com.Seavus.AliExpress.Controller.ShoppingBasketController;
+import com.Seavus.AliExpress.Dao.HibernateAccountDao;
+import com.Seavus.AliExpress.Dao.HibernateCreditCartDao;
 import com.Seavus.AliExpress.Dao.HibernateFillWarehouseDao;
 import com.Seavus.AliExpress.Dao.HibernateProductDao;
 import com.Seavus.AliExpress.Dao.HibernateShoppingBasketDao;
@@ -20,8 +24,12 @@ import com.Seavus.AliExpress.Factory.HibernateSessionFactory;
 import com.Seavus.AliExpress.IO.AppInfo;
 import com.Seavus.AliExpress.IO.Output;
 import com.Seavus.AliExpress.IO.UI;
+import com.Seavus.AliExpress.Model.Account;
+import com.Seavus.AliExpress.Model.CreditCart;
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Service.FillWarehouseService;
+import com.Seavus.AliExpress.Service.HibernateAccountService;
+import com.Seavus.AliExpress.Service.HibernateCreditCartService;
 import com.Seavus.AliExpress.Service.HibernateProductService;
 import com.Seavus.AliExpress.Service.HibernateShoppingBasketService;
 import com.Seavus.AliExpress.Service.HibernateWarehouseService;
@@ -56,7 +64,10 @@ public class AliExpress {
 		Product product = Factory.getProductIstance();
 		HashMap<String, Integer> map = Factory.getMapIstance();
 
-		Output output = Factory.getOutputInstance(product, map, info);
+		CreditCart cart = Factory.getCartInstance();
+		Account account = Factory.getAccountInstance();
+		
+		Output output = Factory.getOutputInstance(product, map, info,cart,account);
 
 		Product p1 = Factory.getProductIstance();
 
@@ -72,6 +83,12 @@ public class AliExpress {
 		HibernateFillWarehouseDao hibernateWarehouseDao = Factory
 				.getHibernateWarehouseDao(hibernateDaoTemplate,
 						hibernateProductDao, product, inputFile);
+		
+		
+		HibernateAccountDao hibernateAccountDao = Factory.getAccountDaoInstance(hibernateDaoTemplate);
+		HibernateCreditCartDao hibernateCartDao = Factory.getCartDaoInstance(hibernateDaoTemplate);
+		
+		
 
 		ProductService productService = Factory.getProductService();
 		HibernateProductService hibernateProductService = Factory
@@ -86,6 +103,11 @@ public class AliExpress {
 		HibernateWarehouseService hibernateWarehouseService = Factory
 				.getHibernateWarehouseService(hibernateWarehouseDao);
 
+		
+		
+		HibernateAccountService hibernateAccountService = Factory.getAccountServiceIstance(hibernateAccountDao);
+		HibernateCreditCartService hibernateCartService = Factory.getCartServiceIstance(hibernateCartDao);
+		
 		info.mainMenuInfo();
 		ProductController productController;
 		ShoppingBasketController shoppingController;
@@ -93,6 +115,9 @@ public class AliExpress {
 		HibernateProductController hibernateProductController;
 		HibernateShoppingBasketController hibernateShoppingBasketController;
 
+		HibernateAccountController hibernateAccountController;
+		HibernateCartController hibernateCartController;
+		
 		String line;
 		while (!(line = input.getInput().nextLine()).equals("end")) {
 			Scanner scanner1 = Factory.getScannerIstance();
@@ -111,6 +136,9 @@ public class AliExpress {
 				info.mainMenuInfo();
 			}
 			if (line.equals("3")) {
+				hibernateAccountController = Factory.getAccountController(hibernateAccountService, output, input, info, hibernateCartService);
+				hibernateCartController = Factory.getCartController(hibernateCartService, output, input, info);
+				
 				hibernateProductController = Factory
 						.hibernateProductController(hibernateProductService,
 								hibernateWarehouseService, output, input, info);
@@ -122,8 +150,13 @@ public class AliExpress {
 				hibernateProductController.setFactory(factory);
 				hibernateShoppingBasketController.setBasketFactory(factory);
 				hibernateShoppingBasketController.setProductFactory(factory);
-				info.HibernateAppMenu(input, hibernateProductController,
-						hibernateShoppingBasketController);
+				
+				hibernateAccountController.setFactory(factory);
+				hibernateCartController.setFactory(factory);
+				
+//				info.HibernateAppMenu(input, hibernateProductController,
+//						hibernateShoppingBasketController);
+				info.springHibernateMenu(input, hibernateProductController, hibernateShoppingBasketController, hibernateCartController, hibernateAccountController);
 				HibernateSessionFactory.closeFactory();
 			}
 		}

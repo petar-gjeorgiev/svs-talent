@@ -11,7 +11,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.Seavus.AliExpress.Model.Account;
 import com.Seavus.AliExpress.Model.Bill;
+import com.Seavus.AliExpress.Model.CreditCart;
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Model.ShoppingBasket;
 
@@ -57,6 +59,38 @@ public class HibernateDaoTemplate {
 			return (Product) session.get(Product.class, id);
 		}
 
+	};
+
+	private GetByIdSetter getCartSetter = new GetByIdSetter() {
+
+		@Override
+		public CreditCart setSession(Session session, int id) {
+			return (CreditCart) session.get(CreditCart.class, id);
+		}
+	};
+
+	private GetByIdSetter getAccountSetter = new GetByIdSetter() {
+
+		@Override
+		public Account setSession(Session session, int id) {
+			return (Account) session.get(Account.class, id);
+		}
+	};
+
+	private DeleteSetter deleteCartSetter = new DeleteSetter() {
+
+		@Override
+		public void setSession(Session session, int id) {
+			session.delete(getCartSetter.setSession(session, id));
+		}
+	};
+
+	private DeleteSetter deleteAccountSetter = new DeleteSetter() {
+
+		@Override
+		public void setSession(Session session, int id) {
+			session.delete(getAccountSetter.setSession(session, id));
+		}
 	};
 
 	public void commit() {
@@ -111,7 +145,7 @@ public class HibernateDaoTemplate {
 	}
 
 	public Product getProductTransaction(SessionFactory factory, String id) {
-		Product p = new Product();
+		Product p = product;
 		transaction(factory);
 		p = getProductSetter.setSession(session, id);
 		commit();
@@ -160,4 +194,59 @@ public class HibernateDaoTemplate {
 		return res;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<CreditCart> listCarts(SessionFactory factory) {
+		transaction(factory);
+		Criteria c = session.createCriteria(CreditCart.class);
+		commit();
+		return c.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Account> listAccounts(SessionFactory factory) {
+		transaction(factory);
+		Criteria c = session.createCriteria(Account.class);
+		commit();
+		return c.list();
+	}
+
+	public CreditCart getCartById(SessionFactory factory, int id) {
+		transaction(factory);
+		CreditCart cart = (CreditCart) getCartSetter.setSession(session, id);
+		commit();
+		return cart;
+	}
+
+	public void deleteCart(SessionFactory factory, int id) {
+		transaction(factory);
+		deleteCartSetter.setSession(session, id);
+		commit();
+	}
+
+	public void deleteAccount(SessionFactory factory, int id) {
+		transaction(factory);
+		deleteAccountSetter.setSession(session, id);
+		commit();
+	}
+
+	public Account getAccount(SessionFactory factory, int id) {
+		transaction(factory);
+		Account a = (Account) getAccountSetter.setSession(session, id);
+		commit();
+		return a;
+	}
+
+	public Account getAccountByCredentials(SessionFactory factory,
+			String email, String password) {
+		transaction(factory);
+		Criteria c = session.createCriteria(Account.class);
+		c.add(Restrictions.eq("email", email));
+		c.add(Restrictions.eq("password", password));
+		Account a = null;
+		if (c.list().size() != 0) {
+			a = (Account) c.list().get(c.list().size() - 1);
+		}
+		commit();
+		return a;
+	}
 }

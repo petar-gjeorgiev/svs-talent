@@ -7,27 +7,39 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.Seavus.AliExpress.Controller.HibernateAccountController;
+import com.Seavus.AliExpress.Controller.HibernateCartController;
 import com.Seavus.AliExpress.Controller.HibernateProductController;
 import com.Seavus.AliExpress.Controller.HibernateShoppingBasketController;
 import com.Seavus.AliExpress.Controller.ProductController;
 import com.Seavus.AliExpress.Controller.ShoppingBasketController;
+import com.Seavus.AliExpress.Dao.HibernateAccountDao;
+import com.Seavus.AliExpress.Dao.HibernateCreditCartDao;
 import com.Seavus.AliExpress.Dao.HibernateFillWarehouseDao;
 import com.Seavus.AliExpress.Dao.HibernateProductDao;
 import com.Seavus.AliExpress.Dao.HibernateShoppingBasketDao;
+import com.Seavus.AliExpress.Dao.Impl.HibernateAccountDaoImpl;
 import com.Seavus.AliExpress.Dao.Impl.HibernateBasketDaoImpl;
+import com.Seavus.AliExpress.Dao.Impl.HibernateCartDaoImpl;
 import com.Seavus.AliExpress.Dao.Impl.HibernateFillWarehouseImpl;
 import com.Seavus.AliExpress.Dao.Impl.HibernateProductDaoImpl;
 import com.Seavus.AliExpress.IO.AppInfo;
 import com.Seavus.AliExpress.IO.Output;
 import com.Seavus.AliExpress.IO.UI;
+import com.Seavus.AliExpress.Model.Account;
+import com.Seavus.AliExpress.Model.CreditCart;
 import com.Seavus.AliExpress.Model.Product;
 import com.Seavus.AliExpress.Service.FillWarehouseService;
+import com.Seavus.AliExpress.Service.HibernateAccountService;
+import com.Seavus.AliExpress.Service.HibernateCreditCartService;
 import com.Seavus.AliExpress.Service.HibernateProductService;
 import com.Seavus.AliExpress.Service.HibernateShoppingBasketService;
 import com.Seavus.AliExpress.Service.HibernateWarehouseService;
 import com.Seavus.AliExpress.Service.ProductService;
 import com.Seavus.AliExpress.Service.ShoppingBasketService;
 import com.Seavus.AliExpress.Service.Impl.FillWarehouseServiceImpl;
+import com.Seavus.AliExpress.Service.Impl.HibernateAccountServiceImpl;
+import com.Seavus.AliExpress.Service.Impl.HibernateCartServiceImpl;
 import com.Seavus.AliExpress.Service.Impl.HibernateFillWarehouseServiceImpl;
 import com.Seavus.AliExpress.Service.Impl.HibernateProductServiceImpl;
 import com.Seavus.AliExpress.Service.Impl.HibernateShoppingBasketServiceImpl;
@@ -52,8 +64,8 @@ public class Factory {
 	}
 
 	public static Output getOutputInstance(Product p,
-			HashMap<String, Integer> map, AppInfo info) {
-		return new Output(p, map, info);
+			HashMap<String, Integer> map, AppInfo info,CreditCart cart,Account account) {
+		return new Output(p, map, info,cart,account);
 	}
 
 	public static FillWarehouseService warehouseServiceInstance() {
@@ -165,5 +177,36 @@ public class Factory {
 	public static Set<Product> getProducts() {
 		return new HashSet<Product>();
 	}
+
+	public static HibernateAccountDao getAccountDaoInstance(HibernateDaoTemplate template) {
+		return new HibernateAccountDaoImpl(template);
+	}
 	
+	public static HibernateCreditCartDao getCartDaoInstance (HibernateDaoTemplate template) {
+		return new HibernateCartDaoImpl(template);
+	}
+	
+	public static HibernateAccountService getAccountServiceIstance(HibernateAccountDao dao) {
+		return new HibernateAccountServiceImpl(dao);
+	}
+	
+	public static HibernateCreditCartService getCartServiceIstance (HibernateCreditCartDao dao) {
+		return new HibernateCartServiceImpl(dao);
+	}
+	
+	public static HibernateCartController getCartController(HibernateCreditCartService service,Output output,UI input,AppInfo info) {
+		return new HibernateCartController(service, output, input, info);
+	}
+	
+	public static HibernateAccountController getAccountController(HibernateAccountService service,Output output,UI input,AppInfo info,HibernateCreditCartService cartService) {
+		return new HibernateAccountController(service, output, input, info, cartService);
+	}
+	
+	public static CreditCart getCartInstance() {
+		return new CreditCart();
+	}
+	
+	public static Account getAccountInstance () {
+		return new Account();
+	}
 }
